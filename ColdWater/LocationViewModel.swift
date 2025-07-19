@@ -2,7 +2,7 @@ import SwiftUI
 import CoreLocation
 
 @MainActor
-class ContentViewViewModel: ObservableObject {
+class LocationViewModel: ObservableObject {
     @Published var latitude: String = ""
     @Published var longitude: String = ""
     @Published var radius: String = "100"

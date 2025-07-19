@@ -2,21 +2,21 @@ import SwiftUI
 import CoreLocation
 
 // MARK: - ContentView with Container/Presentation Pattern
-struct ContentView: View {
-    @StateObject private var viewModel: ContentViewViewModel
+struct LocationView: View {
+    @StateObject private var viewModel: LocationViewModel
     
     init(locationManager: LocationManager = LocationManager()) {
-        _viewModel = StateObject(wrappedValue: ContentViewViewModel(locationManager: locationManager))
+        _viewModel = StateObject(wrappedValue: LocationViewModel(locationManager: locationManager))
     }
     
     var body: some View {
-        ContentViewPresentation(viewModel: viewModel)
+        LocationViewPresentation(viewModel: viewModel)
     }
 }
 
 // MARK: - Presentation View (UI Only)
-struct ContentViewPresentation: View {
-    @ObservedObject var viewModel: ContentViewViewModel
+struct LocationViewPresentation: View {
+    @ObservedObject var viewModel: LocationViewModel
     
     var body: some View {
         NavigationView {
@@ -236,5 +236,5 @@ struct ContentViewPresentation: View {
 }
 
 #Preview {
-    ContentView()
+    LocationView()
 }

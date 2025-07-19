@@ -7,7 +7,7 @@ import Combine
 // MARK: - ContentViewViewModel Tests
 @MainActor
 final class ContentViewViewModelTests: XCTestCase {
-    var viewModel: ContentViewViewModel!
+    var viewModel: LocationViewModel!
     var mockLocationProvider: MockLocationProvider!
     var locationManager: LocationManager!
     var cancellables: Set<AnyCancellable>!
@@ -17,7 +17,7 @@ final class ContentViewViewModelTests: XCTestCase {
         mockLocationProvider = MockLocationProvider()
         mockLocationProvider.mockLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
         locationManager = LocationManager(locationProvider: mockLocationProvider)
-        viewModel = ContentViewViewModel(locationManager: locationManager)
+        viewModel = LocationViewModel(locationManager: locationManager)
         cancellables = Set<AnyCancellable>()
     }
     
@@ -33,7 +33,7 @@ final class ContentViewViewModelTests: XCTestCase {
     
     func testViewModelInitialization() {
         // Given/When
-        let viewModel = ContentViewViewModel(locationManager: locationManager)
+        let viewModel = LocationViewModel(locationManager: locationManager)
         
         // Then
         XCTAssertEqual(viewModel.latitude, "")
@@ -539,7 +539,7 @@ final class ContentViewViewModelTests: XCTestCase {
             for _ in 0..<100 {
                 let provider = MockLocationProvider()
                 let manager = LocationManager(locationProvider: provider)
-                let viewModel = ContentViewViewModel(locationManager: manager)
+                let viewModel = LocationViewModel(locationManager: manager)
                 _ = viewModel.canStartMonitoring // Force computation
             }
         }

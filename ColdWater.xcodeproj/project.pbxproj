@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FB0AEAB22E204BD600CB812A /* ColdWaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */; };
-		FB0AEAB42E204BD600CB812A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAB32E204BD600CB812A /* ContentView.swift */; };
+		FB0AEAB42E204BD600CB812A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAB32E204BD600CB812A /* LocationView.swift */; };
 		FB0AEAB62E204BD800CB812A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB0AEAB52E204BD800CB812A /* Assets.xcassets */; };
 		FB0AEAB92E204BD800CB812A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB0AEAB82E204BD800CB812A /* Preview Assets.xcassets */; };
 		FB0AEAC22E20507300CB812A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAC12E20507300CB812A /* LocationManager.swift */; };
@@ -16,8 +16,12 @@
 		FB0AEADD2E22BAE400CB812A /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */; };
 		FB0AEAE02E22DD2300CB812A /* LocationPickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */; };
 		FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */; };
-		FB0AEAE32E2420C300CB812A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE22E2420C300CB812A /* ContentViewModel.swift */; };
+		FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */; };
 		FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */; };
+		FB652F382E2C393700B323F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F372E2C393700B323F1 /* HomeView.swift */; };
+		FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */; };
+		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
+		FB652F3E2E2C3B6800B323F1 /* HomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +37,7 @@
 /* Begin PBXFileReference section */
 		FB0AEAAE2E204BD600CB812A /* ColdWater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColdWater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdWaterApp.swift; sourceTree = "<group>"; };
-		FB0AEAB32E204BD600CB812A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FB0AEAB32E204BD600CB812A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		FB0AEAB52E204BD800CB812A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB0AEAB82E204BD800CB812A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FB0AEAC12E20507300CB812A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -42,8 +46,12 @@
 		FB0AEAD42E22BAE000CB812A /* ColdWaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColdWaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewTests.swift; sourceTree = "<group>"; };
 		FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
-		FB0AEAE22E2420C300CB812A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewModel.swift; sourceTree = "<group>"; };
+		FB652F372E2C393700B323F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +97,11 @@
 				FB0AEAC32E20507800CB812A /* LocationPickerView.swift */,
 				FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */,
 				FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */,
-				FB0AEAE22E2420C300CB812A /* ContentViewModel.swift */,
-				FB0AEAB32E204BD600CB812A /* ContentView.swift */,
+				FB652F372E2C393700B323F1 /* HomeView.swift */,
+				FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */,
+				FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */,
+				FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */,
+				FB0AEAB32E204BD600CB812A /* LocationView.swift */,
 				FB0AEAB52E204BD800CB812A /* Assets.xcassets */,
 				FB0AEAB72E204BD800CB812A /* Preview Content */,
 			);
@@ -111,6 +122,7 @@
 				FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */,
 				FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */,
 				FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */,
+				FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */,
 			);
 			path = ColdWaterTests;
 			sourceTree = "<group>";
@@ -215,12 +227,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB0AEAB42E204BD600CB812A /* ContentView.swift in Sources */,
+				FB0AEAB42E204BD600CB812A /* LocationView.swift in Sources */,
+				FB652F382E2C393700B323F1 /* HomeView.swift in Sources */,
 				FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */,
+				FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */,
+				FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */,
 				FB0AEAC42E20507800CB812A /* LocationPickerView.swift in Sources */,
 				FB0AEAB22E204BD600CB812A /* ColdWaterApp.swift in Sources */,
 				FB0AEAC22E20507300CB812A /* LocationManager.swift in Sources */,
-				FB0AEAE32E2420C300CB812A /* ContentViewModel.swift in Sources */,
+				FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +245,7 @@
 			files = (
 				FB0AEADD2E22BAE400CB812A /* LocationManagerTests.swift in Sources */,
 				FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */,
+				FB652F3E2E2C3B6800B323F1 /* HomeTests.swift in Sources */,
 				FB0AEAE02E22DD2300CB812A /* LocationPickerViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
