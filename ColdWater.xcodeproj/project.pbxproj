@@ -34,6 +34,9 @@
 		FB5EC1DE2E2C88C300107E24 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1DD2E2C88C300107E24 /* SignUpView.swift */; };
 		FB5EC1E02E2C8EDC00107E24 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1DF2E2C8EDC00107E24 /* SignUpViewModel.swift */; };
 		FB5EC1E22E2C8F2F00107E24 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E12E2C8F2F00107E24 /* SignInViewModel.swift */; };
+		FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */; };
+		FB5EC1E62E2C91FF00107E24 /* AccountConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */; };
+		FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */; };
 		FB652F382E2C393700B323F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F372E2C393700B323F1 /* HomeView.swift */; };
 		FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */; };
 		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
@@ -87,6 +90,9 @@
 		FB5EC1DD2E2C88C300107E24 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		FB5EC1DF2E2C8EDC00107E24 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1E12E2C8F2F00107E24 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionViewModel.swift; sourceTree = "<group>"; };
+		FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionView.swift; sourceTree = "<group>"; };
+		FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		FB652F372E2C393700B323F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 				FB5EC1C02E2C7C0200107E24 /* GoogleService-Info.plist */,
 				FB0AEAB52E204BD800CB812A /* Assets.xcassets */,
 				FB0AEAB72E204BD800CB812A /* Preview Content */,
+				FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */,
 			);
 			path = ColdWater;
 			sourceTree = "<group>";
@@ -234,6 +241,8 @@
 				FB5EC1E12E2C8F2F00107E24 /* SignInViewModel.swift */,
 				FB5EC1DD2E2C88C300107E24 /* SignUpView.swift */,
 				FB5EC1DF2E2C8EDC00107E24 /* SignUpViewModel.swift */,
+				FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */,
+				FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,6 +433,7 @@
 				FB5EC1C62E2C7ECE00107E24 /* AuthenticationStatus.swift in Sources */,
 				FB652F382E2C393700B323F1 /* HomeView.swift in Sources */,
 				FB5EC1D32E2C85D100107E24 /* AppState.swift in Sources */,
+				FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */,
 				FB5EC1E22E2C8F2F00107E24 /* SignInViewModel.swift in Sources */,
 				FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */,
 				FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */,
@@ -439,6 +449,8 @@
 				FB5EC1DC2E2C88BC00107E24 /* SignInView.swift in Sources */,
 				FB5EC1DA2E2C87A300107E24 /* UIConfiguration.swift in Sources */,
 				FB5EC1D82E2C86A000107E24 /* AppleSignInButton.swift in Sources */,
+				FB5EC1E62E2C91FF00107E24 /* AccountConversionView.swift in Sources */,
+				FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */,
 				FB5EC1CD2E2C7F6600107E24 /* SingletonRegistry.swift in Sources */,
 				FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */,
 				FB5EC1E02E2C8EDC00107E24 /* SignUpViewModel.swift in Sources */,

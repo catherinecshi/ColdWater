@@ -69,7 +69,10 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $showingSettings) {
-            SettingsView(viewModel: viewModel)
+            SettingsView {
+                // reset app's authentication state
+                showingSettings = false
+            }
         }
     }
 }
