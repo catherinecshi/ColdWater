@@ -1,0 +1,6 @@
+framework module Pods_ColdWaterTests {
+  umbrella header "Pods-ColdWaterTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
