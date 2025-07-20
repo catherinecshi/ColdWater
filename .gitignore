@@ -86,8 +86,8 @@ fastlane/test_output
 iOSInjectionProject/
 
 # Private Stuff
-ColdWater/ColdWater.entitlements
-ColdWater/GoogleService-Info.plist
-ColdWater/Info.plist
+ColdWater.entitlements
+GoogleService-Info.plist
+Info.plist
 
 # End of https://www.toptal.com/developers/gitignore/api/swift
