@@ -61,7 +61,7 @@ class SettingsViewModel: ObservableObject {
     }
     
     /// Signs the user out of Firebase and AppState
-    func signOut(onSuccess: @escaping () -> Void) {
+    func signOut() {
         isLoading = true
         
         authManager.signOut()
@@ -73,18 +73,19 @@ class SettingsViewModel: ObservableObject {
                     case .failure(_):
                         self?.showError(title: "Sign Out Failed", message: "There was a problem signing out")
                     case .finished:
+                        // AuthenticationManager will update state, RootView will react automatically
                         break
                     }
                 },
                 receiveValue: { _ in
-                    onSuccess()
+                    // Sign out successful - state will update automatically
                 }
             )
             .store(in: &cancellableBag)
     }
     
     /// Deletes the current user account
-    func deleteAccount(onSuccess: @escaping () -> Void) {
+    func deleteAccount() {
         isLoading = true
         
         authManager.deleteCurrentAccount()
@@ -107,10 +108,8 @@ class SettingsViewModel: ObservableObject {
                     self?.alertMessage = "Your account has been successfully deleted."
                     self?.showingSuccessAlert = true
                     
-                    // Navigate to welcome after showing success
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        onSuccess()
-                    }
+                    // AuthenticationManager will update state, RootView will react automatically
+                    // No need for manual navigation
                 }
             )
             .store(in: &cancellableBag)

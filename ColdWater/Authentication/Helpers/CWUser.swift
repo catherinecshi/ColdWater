@@ -1,5 +1,5 @@
 /// User Object representing authenticated user
-struct User {
+struct CWUser {
     /// Types of ways the user can be logged in
     enum LoginType {
         case email

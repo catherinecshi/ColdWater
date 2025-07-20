@@ -20,15 +20,15 @@ protocol AuthenticationServiceProtocol {
     var isUserAuthenticated: Bool { get }
     var isAnonymous: Bool { get }
     var isLoading: Bool { get }
-    var currentUser: User? { get }
+    var currentUser: CWUser? { get }
     
-    func login(email: String, password: String) -> Future<User?, Error>
-    func signUp(email: String, password: String) -> Future<User?, Error>
-    func googleSignIn(presentingViewController: UIViewController) -> Future<User?, Error>
-    func appleSignIn(presentingViewController: UIViewController) -> Future<User?, Error>
-    func signInAnonymously() -> Future<User?, Error>
-    func convertAnonymousUserWithEmail(email: String, password: String) -> Future<User?, Error>
-    func convertAnonymousUserWithGoogle(presentingViewController: UIViewController) async throws -> User
+    func login(email: String, password: String) -> Future<CWUser?, Error>
+    func signUp(email: String, password: String) -> Future<CWUser?, Error>
+    func googleSignIn(presentingViewController: UIViewController) -> Future<CWUser?, Error>
+    func appleSignIn(presentingViewController: UIViewController) -> Future<CWUser?, Error>
+    func signInAnonymously() -> Future<CWUser?, Error>
+    func convertAnonymousUserWithEmail(email: String, password: String) -> Future<CWUser?, Error>
+    func convertAnonymousUserWithGoogle(presentingViewController: UIViewController) async throws -> CWUser
     func signOut() -> Future<Void, Error>
     func deleteCurrentAccount() -> Future<Void, Error>
 }
@@ -37,7 +37,7 @@ protocol AuthenticationServiceProtocol {
 class AuthenticationManager: AuthenticationServiceProtocol, Resettable, ObservableObject {
     static let shared = AuthenticationManager()
     
-    @Published private(set) var currentUser: User?
+    @Published private(set) var currentUser: CWUser?
     @Published private(set) var isLoading: Bool = false // flag for when an operation is processing
     private var cancellables = Set<AnyCancellable>()
     private var currentNonce: String? // for apple sign in security
@@ -69,7 +69,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
             if let firebaseUser = firebaseUser {
                 let loginType = self.determineLoginType(from: firebaseUser)
                 
-                let user = User(
+                let user = CWUser(
                     id: firebaseUser.uid,
                     email: firebaseUser.email,
                     loginType: loginType,
@@ -96,7 +96,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     /// Returns
     /// - User.LoginType
     ///     - logintype for user
-    private func determineLoginType(from firebaseUser: FirebaseAuth.User) -> User.LoginType {
+    private func determineLoginType(from firebaseUser: FirebaseAuth.User) -> CWUser.LoginType {
         if firebaseUser.isAnonymous {
             return .guest
         }
@@ -129,7 +129,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     ///
     /// Returns:
     /// - User object
-    func login(email: String, password: String) -> Future<User?, Error> {
+    func login(email: String, password: String) -> Future<CWUser?, Error> {
         isLoading = true
         return Future { [weak self] promise in
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
@@ -145,10 +145,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                     return
                 }
                 
-                let user = User(
+                let user = CWUser(
                     id: result.user.uid,
                     email: result.user.email,
-                    loginType: User.LoginType.email,
+                    loginType: CWUser.LoginType.email,
                     isAnonymous: false
                 )
                 promise(.success(user))
@@ -167,7 +167,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     ///
     /// Returns:
     /// - User object
-    func signUp(email: String, password: String) -> Future<User?, Error> {
+    func signUp(email: String, password: String) -> Future<CWUser?, Error> {
         print("📱 AuthManager: Attempting to sign up with email: \(email)")
         isLoading = true
         return Future { [weak self] promise in
@@ -191,10 +191,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                 }
                 
                 print("✅ AuthManager: Sign up successful for user: \(result.user.uid)")
-                let user = User(
+                let user = CWUser(
                     id: result.user.uid,
                     email: result.user.email,
-                    loginType: User.LoginType.email,
+                    loginType: CWUser.LoginType.email,
                     isAnonymous: false
                 )
                 promise(.success(user))
@@ -217,7 +217,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     ///     - if the firebase configuration lacks google client id
     /// - AuthError.missingCrendentials
     ///     - if authentication succeeds but required tokens are missing
-    func googleSignIn(presentingViewController: UIViewController) -> Future<User?, Error> {
+    func googleSignIn(presentingViewController: UIViewController) -> Future<CWUser?, Error> {
         isLoading = true
         return Future { [weak self] promise in
             guard let self = self else {
@@ -274,10 +274,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                     
                     print("✅ Firebase auth successful")
                     
-                    let user = User(
+                    let user = CWUser(
                         id: authResult.user.uid,
                         email: authResult.user.email,
-                        loginType: User.LoginType.google,
+                        loginType: CWUser.LoginType.google,
                         isAnonymous: false
                     )
                     
@@ -289,7 +289,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     }
     
     // Apple Sign In implementation
-    func appleSignIn(presentingViewController: UIViewController) -> Future<User?, Error> {
+    func appleSignIn(presentingViewController: UIViewController) -> Future<CWUser?, Error> {
         isLoading = true
         return Future { [weak self] promise in
             guard let self = self else {
@@ -358,10 +358,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                     print("✅ Firebase auth successful")
                     
                     // Create and return user
-                    let user = User(
+                    let user = CWUser(
                         id: authResult.user.uid,
                         email: authResult.user.email,
-                        loginType: User.LoginType.apple,
+                        loginType: CWUser.LoginType.apple,
                         isAnonymous: false
                     )
                     
@@ -390,7 +390,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     ///
     /// Returns:
     /// - User Object
-    func signInAnonymously() -> Future<User?, Error> {
+    func signInAnonymously() -> Future<CWUser?, Error> {
         isLoading = true
         return Future { [weak self] promise in
             Auth.auth().signInAnonymously { (result, error) in
@@ -406,10 +406,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                     return
                 }
                 
-                let user = User(
+                let user = CWUser(
                     id: result.user.uid,
                     email: result.user.email,
-                    loginType: User.LoginType.guest,
+                    loginType: CWUser.LoginType.guest,
                     isAnonymous: true
                 )
                 promise(.success(user))
@@ -428,7 +428,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     ///
     /// Returns:
     /// - User Object
-    func convertAnonymousUserWithEmail(email: String, password: String) -> Future<User?, Error> {
+    func convertAnonymousUserWithEmail(email: String, password: String) -> Future<CWUser?, Error> {
         isLoading = true
         return Future { [weak self] promise in
             guard let currentUser = Auth.auth().currentUser, currentUser.isAnonymous else {
@@ -452,10 +452,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
                     return
                 }
                 
-                let user = User(
+                let user = CWUser(
                     id: result.user.uid,
                     email: result.user.email,
-                    loginType: User.LoginType.email,
+                    loginType: CWUser.LoginType.email,
                     isAnonymous: false
                 )
                 promise(.success(user))
@@ -481,7 +481,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     /// - AuthError.missingCredentials
     ///     - google authentication succeeds but required tokens are missing
     @MainActor
-    func convertAnonymousUserWithGoogle(presentingViewController: UIViewController) async throws -> User {
+    func convertAnonymousUserWithGoogle(presentingViewController: UIViewController) async throws -> CWUser {
         guard let currentUser = Auth.auth().currentUser, currentUser.isAnonymous else {
             throw AuthError.notAnonymous
         }
@@ -520,10 +520,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
             isLoading = false
             
             // Return updated user
-            return User(
+            return CWUser(
                 id: authResult.user.uid,
                 email: authResult.user.email,
-                loginType: User.LoginType.google,
+                loginType: CWUser.LoginType.google,
                 isAnonymous: false
             )
         } catch {
@@ -548,7 +548,7 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     /// - AuthError.missingCredentials
     ///     - apple authentication succeds but required tokens are missing
     @MainActor
-    func convertAnonymousUserWithApple(presentingViewController: UIViewController) async throws -> User {
+    func convertAnonymousUserWithApple(presentingViewController: UIViewController) async throws -> CWUser {
         guard let currentUser = Auth.auth().currentUser, currentUser.isAnonymous else {
             throw AuthError.notAnonymous
         }
@@ -599,10 +599,10 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
             isLoading = false
             
             // Return updated user
-            return User(
+            return CWUser(
                 id: authResult.user.uid,
                 email: authResult.user.email,
-                loginType: User.LoginType.apple,
+                loginType: CWUser.LoginType.apple,
                 isAnonymous: false
             )
         } catch {
@@ -615,20 +615,22 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     /// Throws firebase authentication error if sign out fails
     func signOut() -> Future<Void, Error> {
         return Future { promise in
-            Task {
-                if let uid = Auth.auth().currentUser?.uid {
-                    print("Current user UID \(uid)")
-                }
+            do {
+                // This triggers the auth state listener which updates currentUser to nil
+                try Auth.auth().signOut()
                 
-                // delete all local userdefault files
+                // Clean up local data after successful sign out
                 if let bundleIdentifier = Bundle.main.bundleIdentifier {
                     UserDefaults.standard.removePersistentDomain(forName: bundleIdentifier)
                 }
                 
-                // reset all singletons
+                // Reset all singletons
                 SingletonRegistry.shared.resetAll()
                 
                 promise(.success(()))
+            } catch {
+                // Handle sign out error
+                promise(.failure(error))
             }
         }
     }

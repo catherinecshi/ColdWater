@@ -20,10 +20,9 @@
 		FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */; };
 		FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */; };
 		FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */; };
-		FB5EC1C12E2C7C0200107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC1C02E2C7C0200107E24 /* GoogleService-Info.plist */; };
 		FB5EC1C62E2C7ECE00107E24 /* AuthenticationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */; };
 		FB5EC1C82E2C7EFB00107E24 /* AppleSignInHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */; };
-		FB5EC1CA2E2C7F2D00107E24 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C92E2C7F2D00107E24 /* User.swift */; };
+		FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */; };
 		FB5EC1CD2E2C7F6600107E24 /* SingletonRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */; };
 		FB5EC1CF2E2C856700107E24 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */; };
 		FB5EC1D32E2C85D100107E24 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1D22E2C85D100107E24 /* AppState.swift */; };
@@ -37,6 +36,8 @@
 		FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */; };
 		FB5EC1E62E2C91FF00107E24 /* AccountConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */; };
 		FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */; };
+		FB5EC1EA2E2D41EB00107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */; };
+		FB5EC1EC2E2D449200107E24 /* AuthenticationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */; };
 		FB652F382E2C393700B323F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F372E2C393700B323F1 /* HomeView.swift */; };
 		FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */; };
 		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
@@ -74,12 +75,11 @@
 		FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
 		FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewModel.swift; sourceTree = "<group>"; };
-		FB5EC1C02E2C7C0200107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FB5EC1C22E2C7C1F00107E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB5EC1C32E2C7E0900107E24 /* ColdWater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColdWater.entitlements; sourceTree = "<group>"; };
 		FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationStatus.swift; sourceTree = "<group>"; };
 		FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelpers.swift; sourceTree = "<group>"; };
-		FB5EC1C92E2C7F2D00107E24 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWUser.swift; sourceTree = "<group>"; };
 		FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonRegistry.swift; sourceTree = "<group>"; };
 		FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1D22E2C85D100107E24 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -93,6 +93,8 @@
 		FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionView.swift; sourceTree = "<group>"; };
 		FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerTests.swift; sourceTree = "<group>"; };
 		FB652F372E2C393700B323F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -170,15 +172,15 @@
 				FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */,
 				FB5EC1D92E2C87A300107E24 /* UIConfiguration.swift */,
 				FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */,
+				FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */,
 				FB652F372E2C393700B323F1 /* HomeView.swift */,
 				FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */,
 				FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */,
 				FB0AEAB32E204BD600CB812A /* LocationView.swift */,
 				FB5EC1C22E2C7C1F00107E24 /* Info.plist */,
-				FB5EC1C02E2C7C0200107E24 /* GoogleService-Info.plist */,
+				FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */,
 				FB0AEAB52E204BD800CB812A /* Assets.xcassets */,
 				FB0AEAB72E204BD800CB812A /* Preview Content */,
-				FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */,
 			);
 			path = ColdWater;
 			sourceTree = "<group>";
@@ -198,6 +200,7 @@
 				FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */,
 				FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */,
 				FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */,
+				FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */,
 			);
 			path = ColdWaterTests;
 			sourceTree = "<group>";
@@ -225,7 +228,7 @@
 			children = (
 				FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */,
 				FB5EC1D72E2C86A000107E24 /* AppleSignInButton.swift */,
-				FB5EC1C92E2C7F2D00107E24 /* User.swift */,
+				FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */,
 				FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */,
 				FB5EC1D22E2C85D100107E24 /* AppState.swift */,
 			);
@@ -341,7 +344,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5EC1C12E2C7C0200107E24 /* GoogleService-Info.plist in Resources */,
+				FB5EC1EA2E2D41EB00107E24 /* GoogleService-Info.plist in Resources */,
 				FB0AEAB92E204BD800CB812A /* Preview Assets.xcassets in Resources */,
 				FB0AEAB62E204BD800CB812A /* Assets.xcassets in Resources */,
 			);
@@ -439,7 +442,7 @@
 				FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */,
 				FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */,
 				FB5EC1CF2E2C856700107E24 /* WelcomeViewModel.swift in Sources */,
-				FB5EC1CA2E2C7F2D00107E24 /* User.swift in Sources */,
+				FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */,
 				FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */,
 				FB5EC1DE2E2C88C300107E24 /* SignUpView.swift in Sources */,
 				FB0AEAC42E20507800CB812A /* LocationPickerView.swift in Sources */,
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB0AEADD2E22BAE400CB812A /* LocationManagerTests.swift in Sources */,
+				FB5EC1EC2E2D449200107E24 /* AuthenticationManagerTests.swift in Sources */,
 				FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */,
 				FB652F3E2E2C3B6800B323F1 /* HomeTests.swift in Sources */,
 				FB0AEAE02E22DD2300CB812A /* LocationPickerViewTests.swift in Sources */,

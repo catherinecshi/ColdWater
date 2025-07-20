@@ -20,7 +20,7 @@ struct WelcomeView: View {
                     Spacer()
                     
                     // Logo
-                    Image("AppIcon")
+                    Image("ColdWaterIcon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 200, height: 200)
@@ -33,7 +33,7 @@ struct WelcomeView: View {
                         .multilineTextAlignment(.center)
                     
                     // Subtitle
-                    Text("Wake Up with Adrenaline")
+                    Text("Wake Up Energetic and Ready to Go")
                         .font(UIConfiguration.swiftUISubtitleFont)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -48,14 +48,14 @@ struct WelcomeView: View {
                             Text("Sign In with Email")
                                 .frame(maxWidth: .infinity)
                         }
-                        .buttonStyle(AuthButtonStyle.primary)
+                        .buttonStyle(AuthButtonStyle.secondary)
                         
                         // Email Sign Up Button
                         NavigationLink(value: NavigationDestination.signUp) {
                             Text("Sign Up with Email")
                                 .frame(maxWidth: .infinity)
                         }
-                        .buttonStyle(AuthButtonStyle.secondary)
+                        .buttonStyle(AuthButtonStyle.primary)
                         
                         // Google Sign In Button
                         Button("Sign In with Google") {

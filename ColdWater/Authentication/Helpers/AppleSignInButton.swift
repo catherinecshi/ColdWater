@@ -8,7 +8,7 @@ struct CustomAppleSignInButton: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                Text("Sign in with Apple")
+                Text("Sign In with Apple")
                     .font(UIConfiguration.swiftUIButtonFont)
                     .foregroundColor(.white)
             }

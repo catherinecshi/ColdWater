@@ -131,11 +131,11 @@ extension AuthButtonStyle {
         borderColor: .clear
     )
     
-    /// Secondary button style (clear background, dark text, gray border)
+    /// Secondary button style (clear background, dark text, black border)
     static let secondary = AuthButtonStyle(
         backgroundColor: .clear,
         foregroundColor: .primary,
-        borderColor: Color(.systemGray3)
+        borderColor: .black
     )
     
     /// Guest button style (clear background, gray text, gray border)
@@ -145,10 +145,10 @@ extension AuthButtonStyle {
         borderColor: Color(.systemGray3)
     )
     
-    /// Google button style (white background, dark text, gray border)
+    /// Google button style (green background, white text, gray border)
     static let google = AuthButtonStyle(
-        backgroundColor: .white,
-        foregroundColor: .primary,
+        backgroundColor: .green,
+        foregroundColor: .white,
         borderColor: Color(.systemGray3)
     )
 }
