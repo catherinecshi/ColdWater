@@ -22,6 +22,9 @@ protocol AuthenticationServiceProtocol {
     var isLoading: Bool { get }
     var currentUser: CWUser? { get }
     
+    // publisher for loading state - for binding
+    var isLoadingPublisher: Published<Bool>.Publisher { get }
+    
     func login(email: String, password: String) -> Future<CWUser?, Error>
     func signUp(email: String, password: String) -> Future<CWUser?, Error>
     func googleSignIn(presentingViewController: UIViewController) -> Future<CWUser?, Error>
@@ -51,6 +54,11 @@ class AuthenticationManager: AuthenticationServiceProtocol, Resettable, Observab
     /// Returns true when the current user is anonymously logged in
     var isAnonymous: Bool {
         return Auth.auth().currentUser?.isAnonymous ?? false
+    }
+    
+    /// Publishes loading status
+    var isLoadingPublisher: Published<Bool>.Publisher {
+        return $isLoading
     }
     
     /// Initializes Authentication Manager

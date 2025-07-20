@@ -10,7 +10,7 @@ struct SignInView: View {
     
     /// Initializes view with application state
     /// Takes AppState, which contains information about currentUser
-    init(state: AppState) {
+    init(state: any AppStateProtocol) {
         self._viewModel = StateObject(wrappedValue: SignInViewModel(state: state))
     }
     

@@ -2,25 +2,26 @@ import SwiftUI
 import Combine
 import AuthenticationServices
 
-/// View model for WelcomeView (SwiftUI)
+/// View model for WelcomeView
 class WelcomeViewModel: ObservableObject {
-    @Published var state: AppState
+    @Published var state: any AppStateProtocol
     @Published var statusViewModel: AuthenticationStatus?
     @Published var isLoading: Bool = false
     @Published var showingAlert: Bool = false
     
     private var cancellableBag = Set<AnyCancellable>()
-    private let authManager: AuthenticationManager
+    private let authManager: any AuthenticationServiceProtocol
     
     /// Initializes with app state and authentication manager
-    init(state: AppState, authManager: AuthenticationManager = .shared) {
+    init(state: any AppStateProtocol, authManager: any AuthenticationServiceProtocol = AuthenticationManager.shared) {
         self.state = state
         self.authManager = authManager
         
         // Observe loading state from auth manager
-        authManager.$isLoading
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isLoading, on: self)
+        authManager.isLoadingPublisher
+            .sink { [weak self] isLoading in
+                self?.isLoading = isLoading
+            }
             .store(in: &cancellableBag)
     }
     

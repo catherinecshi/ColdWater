@@ -133,7 +133,7 @@ extension AuthButtonStyle {
     
     /// Secondary button style (clear background, dark text, black border)
     static let secondary = AuthButtonStyle(
-        backgroundColor: .clear,
+        backgroundColor: .white,
         foregroundColor: .primary,
         borderColor: .black
     )

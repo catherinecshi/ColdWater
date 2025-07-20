@@ -8,13 +8,13 @@ class SignInViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var statusViewModel: AuthenticationStatus?
-    @Published var state: AppState
+    @Published var state: any AppStateProtocol
     
     private var cancellableBag = Set<AnyCancellable>()
-    private let authManager: AuthenticationManager
+    private let authManager: AuthenticationServiceProtocol
     
     /// Initiates model with app state and authentication manager
-    init(state: AppState, authManager: AuthenticationManager = .shared) {
+    init(state: any AppStateProtocol, authManager: AuthenticationServiceProtocol = AuthenticationManager.shared) {
         self.state = state
         self.authManager = authManager
     }

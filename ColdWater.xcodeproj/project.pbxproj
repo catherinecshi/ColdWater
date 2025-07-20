@@ -17,7 +17,7 @@
 		FB0AEAC42E20507800CB812A /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAC32E20507800CB812A /* LocationPickerView.swift */; };
 		FB0AEADD2E22BAE400CB812A /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */; };
 		FB0AEAE02E22DD2300CB812A /* LocationPickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */; };
-		FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */; };
+		FB0AEAE12E22DD2300CB812A /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEADF2E22DD2300CB812A /* LocationViewModelTests.swift */; };
 		FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */; };
 		FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */; };
 		FB5EC1C62E2C7ECE00107E24 /* AuthenticationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */; };
@@ -36,12 +36,18 @@
 		FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */; };
 		FB5EC1E62E2C91FF00107E24 /* AccountConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */; };
 		FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */; };
-		FB5EC1EA2E2D41EB00107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */; };
 		FB5EC1EC2E2D449200107E24 /* AuthenticationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */; };
+		FB5EC1EE2E2D4E9100107E24 /* WelcomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1ED2E2D4E9100107E24 /* WelcomeViewTests.swift */; };
+		FB5EC1F22E2D51CF00107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */; };
+		FB5EC1F42E2D54E000107E24 /* TestableAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F32E2D54E000107E24 /* TestableAuthenticationManager.swift */; };
+		FB5EC1F62E2D551F00107E24 /* MockFirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F52E2D551F00107E24 /* MockFirebaseAuth.swift */; };
+		FB5EC1FA2E2D7F1F00107E24 /* SignInViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F92E2D7F1F00107E24 /* SignInViewTests.swift */; };
+		FB5EC1FC2E2D81CF00107E24 /* SignUpViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1FB2E2D81CF00107E24 /* SignUpViewTests.swift */; };
+		FB5EC1FE2E2D845400107E24 /* AccountConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1FD2E2D845400107E24 /* AccountConversionViewTests.swift */; };
 		FB652F382E2C393700B323F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F372E2C393700B323F1 /* HomeView.swift */; };
 		FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */; };
 		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
-		FB652F3E2E2C3B6800B323F1 /* HomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */; };
+		FB652F3E2E2C3B6800B323F1 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */; };
 		FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +78,7 @@
 		FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
 		FB0AEAD42E22BAE000CB812A /* ColdWaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColdWaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewTests.swift; sourceTree = "<group>"; };
-		FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
+		FB0AEADF2E22DD2300CB812A /* LocationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModelTests.swift; sourceTree = "<group>"; };
 		FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1C22E2C7C1F00107E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,12 +99,18 @@
 		FB5EC1E32E2C91F200107E24 /* AccountConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1E52E2C91FF00107E24 /* AccountConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionView.swift; sourceTree = "<group>"; };
 		FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerTests.swift; sourceTree = "<group>"; };
+		FB5EC1ED2E2D4E9100107E24 /* WelcomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewTests.swift; sourceTree = "<group>"; };
+		FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB5EC1F32E2D54E000107E24 /* TestableAuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableAuthenticationManager.swift; sourceTree = "<group>"; };
+		FB5EC1F52E2D551F00107E24 /* MockFirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebaseAuth.swift; sourceTree = "<group>"; };
+		FB5EC1F92E2D7F1F00107E24 /* SignInViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewTests.swift; sourceTree = "<group>"; };
+		FB5EC1FB2E2D81CF00107E24 /* SignUpViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewTests.swift; sourceTree = "<group>"; };
+		FB5EC1FD2E2D845400107E24 /* AccountConversionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionViewTests.swift; sourceTree = "<group>"; };
 		FB652F372E2C393700B323F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTests.swift; sourceTree = "<group>"; };
+		FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
 		FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,7 +190,7 @@
 				FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */,
 				FB0AEAB32E204BD600CB812A /* LocationView.swift */,
 				FB5EC1C22E2C7C1F00107E24 /* Info.plist */,
-				FB5EC1E92E2D41EB00107E24 /* GoogleService-Info.plist */,
+				FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */,
 				FB0AEAB52E204BD800CB812A /* Assets.xcassets */,
 				FB0AEAB72E204BD800CB812A /* Preview Content */,
 			);
@@ -196,11 +208,9 @@
 		FB0AEAD52E22BAE000CB812A /* ColdWaterTests */ = {
 			isa = PBXGroup;
 			children = (
-				FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */,
-				FB0AEADF2E22DD2300CB812A /* ContentViewModelTests.swift */,
-				FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */,
-				FB652F3D2E2C3B6800B323F1 /* HomeTests.swift */,
-				FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */,
+				FB5EC1F72E2D723B00107E24 /* Authentication */,
+				FB5EC1F82E2D724F00107E24 /* Location */,
+				FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */,
 			);
 			path = ColdWaterTests;
 			sourceTree = "<group>";
@@ -228,8 +238,8 @@
 			children = (
 				FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */,
 				FB5EC1D72E2C86A000107E24 /* AppleSignInButton.swift */,
-				FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */,
 				FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */,
+				FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */,
 				FB5EC1D22E2C85D100107E24 /* AppState.swift */,
 			);
 			path = Helpers;
@@ -238,8 +248,8 @@
 		FB5EC1D12E2C859200107E24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */,
 				FB5EC1D42E2C85F500107E24 /* WelcomeView.swift */,
+				FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */,
 				FB5EC1DB2E2C88BC00107E24 /* SignInView.swift */,
 				FB5EC1E12E2C8F2F00107E24 /* SignInViewModel.swift */,
 				FB5EC1DD2E2C88C300107E24 /* SignUpView.swift */,
@@ -256,6 +266,30 @@
 				FB0AEAC12E20507300CB812A /* LocationManager.swift */,
 				FB0AEAC32E20507800CB812A /* LocationPickerView.swift */,
 				FB0AEAE42E2445A000CB812A /* LocationPickerViewModel.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		FB5EC1F72E2D723B00107E24 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FB5EC1F52E2D551F00107E24 /* MockFirebaseAuth.swift */,
+				FB5EC1F32E2D54E000107E24 /* TestableAuthenticationManager.swift */,
+				FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */,
+				FB5EC1ED2E2D4E9100107E24 /* WelcomeViewTests.swift */,
+				FB5EC1F92E2D7F1F00107E24 /* SignInViewTests.swift */,
+				FB5EC1FB2E2D81CF00107E24 /* SignUpViewTests.swift */,
+				FB5EC1FD2E2D845400107E24 /* AccountConversionViewTests.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		FB5EC1F82E2D724F00107E24 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				FB0AEAC62E205A9300CB812A /* LocationManagerTests.swift */,
+				FB0AEADF2E22DD2300CB812A /* LocationViewModelTests.swift */,
+				FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -344,9 +378,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5EC1EA2E2D41EB00107E24 /* GoogleService-Info.plist in Resources */,
 				FB0AEAB92E204BD800CB812A /* Preview Assets.xcassets in Resources */,
 				FB0AEAB62E204BD800CB812A /* Assets.xcassets in Resources */,
+				FB5EC1F22E2D51CF00107E24 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,9 +500,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB0AEADD2E22BAE400CB812A /* LocationManagerTests.swift in Sources */,
+				FB5EC1FE2E2D845400107E24 /* AccountConversionViewTests.swift in Sources */,
+				FB5EC1FA2E2D7F1F00107E24 /* SignInViewTests.swift in Sources */,
 				FB5EC1EC2E2D449200107E24 /* AuthenticationManagerTests.swift in Sources */,
-				FB0AEAE12E22DD2300CB812A /* ContentViewModelTests.swift in Sources */,
-				FB652F3E2E2C3B6800B323F1 /* HomeTests.swift in Sources */,
+				FB0AEAE12E22DD2300CB812A /* LocationViewModelTests.swift in Sources */,
+				FB5EC1EE2E2D4E9100107E24 /* WelcomeViewTests.swift in Sources */,
+				FB5EC1F42E2D54E000107E24 /* TestableAuthenticationManager.swift in Sources */,
+				FB652F3E2E2C3B6800B323F1 /* HomeViewTests.swift in Sources */,
+				FB5EC1F62E2D551F00107E24 /* MockFirebaseAuth.swift in Sources */,
+				FB5EC1FC2E2D81CF00107E24 /* SignUpViewTests.swift in Sources */,
 				FB0AEAE02E22DD2300CB812A /* LocationPickerViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

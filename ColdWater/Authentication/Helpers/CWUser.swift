@@ -20,3 +20,17 @@ struct CWUser {
         self.isAnonymous = isAnonymous
     }
 }
+
+// MARK: - Equatable Conformance
+extension CWUser: Equatable {
+    static func == (lhs: CWUser, rhs: CWUser) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.email == rhs.email &&
+               lhs.loginType == rhs.loginType &&
+               lhs.isAnonymous == rhs.isAnonymous
+    }
+}
+
+extension CWUser.LoginType: Equatable {
+    // making it explicit for clarity
+}

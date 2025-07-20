@@ -2,8 +2,17 @@
 import SwiftUI
 import Combine
 
-class AppState: ObservableObject {
+protocol AppStateProtocol: ObservableObject {
+    var currentUser: CWUser? { get set }
+    var currentUserPublisher: Published<CWUser?>.Publisher { get }
+}
+
+class AppState: AppStateProtocol {
     static let shared = AppState()
     
     @Published var currentUser: CWUser?
+    
+    var currentUserPublisher: Published<CWUser?>.Publisher {
+        $currentUser
+    }
 }
