@@ -38,8 +38,13 @@ struct RootView: View {
     var body: some View {
         Group {
             if authManager.isUserAuthenticated {
-                HomeView()
-                    .environmentObject(appState)
+                if appState.hasCompletedOnboarding {
+                    HomeView()
+                        .environmentObject(appState)
+                } else {
+                    OnboardingContainerView()
+                        .environmentObject(appState)
+                }
             } else {
                 WelcomeView(state: appState)
             }

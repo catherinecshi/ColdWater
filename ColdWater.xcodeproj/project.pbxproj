@@ -38,17 +38,28 @@
 		FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */; };
 		FB5EC1EC2E2D449200107E24 /* AuthenticationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */; };
 		FB5EC1EE2E2D4E9100107E24 /* WelcomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1ED2E2D4E9100107E24 /* WelcomeViewTests.swift */; };
-		FB5EC1F22E2D51CF00107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */; };
 		FB5EC1F42E2D54E000107E24 /* TestableAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F32E2D54E000107E24 /* TestableAuthenticationManager.swift */; };
 		FB5EC1F62E2D551F00107E24 /* MockFirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F52E2D551F00107E24 /* MockFirebaseAuth.swift */; };
 		FB5EC1FA2E2D7F1F00107E24 /* SignInViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1F92E2D7F1F00107E24 /* SignInViewTests.swift */; };
 		FB5EC1FC2E2D81CF00107E24 /* SignUpViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1FB2E2D81CF00107E24 /* SignUpViewTests.swift */; };
 		FB5EC1FE2E2D845400107E24 /* AccountConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1FD2E2D845400107E24 /* AccountConversionViewTests.swift */; };
+		FB5EC2062E2D8DE500107E24 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2022E2D8DE400107E24 /* OnboardingContainerView.swift */; };
+		FB5EC2072E2D8DE500107E24 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2042E2D8DE400107E24 /* UserPreferences.swift */; };
+		FB5EC2082E2D8DE500107E24 /* WakeUpTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2002E2D8DE400107E24 /* WakeUpTimeView.swift */; };
+		FB5EC2092E2D8DE500107E24 /* OnboardingConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1FF2E2D8DE400107E24 /* OnboardingConfirmationView.swift */; };
+		FB5EC20A2E2D8DE500107E24 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2032E2D8DE400107E24 /* OnboardingCoordinator.swift */; };
+		FB5EC20C2E2D8E7500107E24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB5EC20B2E2D8E7500107E24 /* GoogleService-Info.plist */; };
+		FB5EC20E2E2D90AF00107E24 /* WakeUpMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC20D2E2D90AE00107E24 /* WakeUpMethodView.swift */; };
+		FB5EC2102E2D90B400107E24 /* StepsConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC20F2E2D90B400107E24 /* StepsConfigView.swift */; };
+		FB5EC2122E2D90BA00107E24 /* LocationConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2112E2D90BA00107E24 /* LocationConfigView.swift */; };
+		FB5EC2142E2D90C000107E24 /* GracePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2132E2D90C000107E24 /* GracePeriodView.swift */; };
+		FB5EC2162E2D90CB00107E24 /* MotivationMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2152E2D90CB00107E24 /* MotivationMethodView.swift */; };
 		FB652F382E2C393700B323F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F372E2C393700B323F1 /* HomeView.swift */; };
 		FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */; };
 		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
 		FB652F3E2E2C3B6800B323F1 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */; };
 		FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */; };
+		FBDDCE9D2E2E87140085B7E4 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,17 +112,28 @@
 		FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1EB2E2D449200107E24 /* AuthenticationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManagerTests.swift; sourceTree = "<group>"; };
 		FB5EC1ED2E2D4E9100107E24 /* WelcomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewTests.swift; sourceTree = "<group>"; };
-		FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FB5EC1F32E2D54E000107E24 /* TestableAuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableAuthenticationManager.swift; sourceTree = "<group>"; };
 		FB5EC1F52E2D551F00107E24 /* MockFirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebaseAuth.swift; sourceTree = "<group>"; };
 		FB5EC1F92E2D7F1F00107E24 /* SignInViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewTests.swift; sourceTree = "<group>"; };
 		FB5EC1FB2E2D81CF00107E24 /* SignUpViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewTests.swift; sourceTree = "<group>"; };
 		FB5EC1FD2E2D845400107E24 /* AccountConversionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConversionViewTests.swift; sourceTree = "<group>"; };
+		FB5EC1FF2E2D8DE400107E24 /* OnboardingConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingConfirmationView.swift; sourceTree = "<group>"; };
+		FB5EC2002E2D8DE400107E24 /* WakeUpTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpTimeView.swift; sourceTree = "<group>"; };
+		FB5EC2022E2D8DE400107E24 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		FB5EC2032E2D8DE400107E24 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		FB5EC2042E2D8DE400107E24 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		FB5EC20B2E2D8E7500107E24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FB5EC20D2E2D90AE00107E24 /* WakeUpMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpMethodView.swift; sourceTree = "<group>"; };
+		FB5EC20F2E2D90B400107E24 /* StepsConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsConfigView.swift; sourceTree = "<group>"; };
+		FB5EC2112E2D90BA00107E24 /* LocationConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationConfigView.swift; sourceTree = "<group>"; };
+		FB5EC2132E2D90C000107E24 /* GracePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GracePeriodView.swift; sourceTree = "<group>"; };
+		FB5EC2152E2D90CB00107E24 /* MotivationMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationMethodView.swift; sourceTree = "<group>"; };
 		FB652F372E2C393700B323F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FB652F392E2C3A6A00B323F1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
 		FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,9 +202,11 @@
 				FB5EC1C32E2C7E0900107E24 /* ColdWater.entitlements */,
 				FB5EC1CB2E2C7F5E00107E24 /* Backend */,
 				FB5EC1C42E2C7EB600107E24 /* Authentication */,
+				FBDDCE9B2E2E87030085B7E4 /* Pedometer */,
 				FB5EC1D62E2C863200107E24 /* Location */,
-				FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */,
+				FB5EC2052E2D8DE400107E24 /* Onboarding */,
 				FB5EC1D92E2C87A300107E24 /* UIConfiguration.swift */,
+				FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */,
 				FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */,
 				FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */,
 				FB652F372E2C393700B323F1 /* HomeView.swift */,
@@ -190,7 +214,7 @@
 				FB0AEAE22E2420C300CB812A /* LocationViewModel.swift */,
 				FB0AEAB32E204BD600CB812A /* LocationView.swift */,
 				FB5EC1C22E2C7C1F00107E24 /* Info.plist */,
-				FB5EC1F12E2D51CF00107E24 /* GoogleService-Info.plist */,
+				FB5EC20B2E2D8E7500107E24 /* GoogleService-Info.plist */,
 				FB0AEAB52E204BD800CB812A /* Assets.xcassets */,
 				FB0AEAB72E204BD800CB812A /* Preview Content */,
 			);
@@ -228,7 +252,10 @@
 		FB5EC1CB2E2C7F5E00107E24 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				FB5EC2042E2D8DE400107E24 /* UserPreferences.swift */,
 				FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */,
+				FB5EC1D22E2C85D100107E24 /* AppState.swift */,
+				FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -239,8 +266,6 @@
 				FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */,
 				FB5EC1D72E2C86A000107E24 /* AppleSignInButton.swift */,
 				FB5EC1C52E2C7ECE00107E24 /* AuthenticationStatus.swift */,
-				FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */,
-				FB5EC1D22E2C85D100107E24 /* AppState.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -292,6 +317,38 @@
 				FB0AEADE2E22DD2300CB812A /* LocationPickerViewTests.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		FB5EC2012E2D8DE400107E24 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB5EC2002E2D8DE400107E24 /* WakeUpTimeView.swift */,
+				FB5EC20D2E2D90AE00107E24 /* WakeUpMethodView.swift */,
+				FB5EC20F2E2D90B400107E24 /* StepsConfigView.swift */,
+				FB5EC2112E2D90BA00107E24 /* LocationConfigView.swift */,
+				FB5EC2132E2D90C000107E24 /* GracePeriodView.swift */,
+				FB5EC2152E2D90CB00107E24 /* MotivationMethodView.swift */,
+				FB5EC1FF2E2D8DE400107E24 /* OnboardingConfirmationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FB5EC2052E2D8DE400107E24 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				FB5EC2012E2D8DE400107E24 /* Views */,
+				FB5EC2022E2D8DE400107E24 /* OnboardingContainerView.swift */,
+				FB5EC2032E2D8DE400107E24 /* OnboardingCoordinator.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		FBDDCE9B2E2E87030085B7E4 /* Pedometer */ = {
+			isa = PBXGroup;
+			children = (
+				FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */,
+			);
+			path = Pedometer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,7 +437,7 @@
 			files = (
 				FB0AEAB92E204BD800CB812A /* Preview Assets.xcassets in Resources */,
 				FB0AEAB62E204BD800CB812A /* Assets.xcassets in Resources */,
-				FB5EC1F22E2D51CF00107E24 /* GoogleService-Info.plist in Resources */,
+				FB5EC20C2E2D8E7500107E24 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,16 +526,19 @@
 				FB0AEAB42E204BD600CB812A /* LocationView.swift in Sources */,
 				FB5EC1C62E2C7ECE00107E24 /* AuthenticationStatus.swift in Sources */,
 				FB652F382E2C393700B323F1 /* HomeView.swift in Sources */,
+				FB5EC2122E2D90BA00107E24 /* LocationConfigView.swift in Sources */,
 				FB5EC1D32E2C85D100107E24 /* AppState.swift in Sources */,
 				FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */,
 				FB5EC1E22E2C8F2F00107E24 /* SignInViewModel.swift in Sources */,
 				FB0AEAE52E2445A000CB812A /* LocationPickerViewModel.swift in Sources */,
 				FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */,
+				FB5EC2102E2D90B400107E24 /* StepsConfigView.swift in Sources */,
 				FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */,
 				FB5EC1CF2E2C856700107E24 /* WelcomeViewModel.swift in Sources */,
 				FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */,
 				FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */,
 				FB5EC1DE2E2C88C300107E24 /* SignUpView.swift in Sources */,
+				FB5EC2142E2D90C000107E24 /* GracePeriodView.swift in Sources */,
 				FB0AEAC42E20507800CB812A /* LocationPickerView.swift in Sources */,
 				FB5EC1C82E2C7EFB00107E24 /* AppleSignInHelpers.swift in Sources */,
 				FB0AEAB22E204BD600CB812A /* ColdWaterApp.swift in Sources */,
@@ -490,8 +550,16 @@
 				FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */,
 				FB5EC1CD2E2C7F6600107E24 /* SingletonRegistry.swift in Sources */,
 				FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */,
+				FB5EC2062E2D8DE500107E24 /* OnboardingContainerView.swift in Sources */,
+				FB5EC2072E2D8DE500107E24 /* UserPreferences.swift in Sources */,
+				FB5EC20E2E2D90AF00107E24 /* WakeUpMethodView.swift in Sources */,
+				FB5EC2082E2D8DE500107E24 /* WakeUpTimeView.swift in Sources */,
+				FB5EC2092E2D8DE500107E24 /* OnboardingConfirmationView.swift in Sources */,
+				FB5EC20A2E2D8DE500107E24 /* OnboardingCoordinator.swift in Sources */,
+				FBDDCE9D2E2E87140085B7E4 /* HealthKitManager.swift in Sources */,
 				FB5EC1E02E2C8EDC00107E24 /* SignUpViewModel.swift in Sources */,
 				FB5EC1D52E2C85F500107E24 /* WelcomeView.swift in Sources */,
+				FB5EC2162E2D90CB00107E24 /* MotivationMethodView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +727,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColdWater/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To track your steps";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To track your steps";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "For the app to track your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "For the app to track your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
@@ -697,6 +767,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColdWater/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To track your steps";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To track your steps";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "For the app to track your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "For the app to track your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
