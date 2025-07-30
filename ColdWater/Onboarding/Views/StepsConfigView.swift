@@ -6,6 +6,7 @@ struct StepsConfigView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @State private var selectedSteps = 100
     @State private var showingHealthKitAlert = false
+    @State private var showingPermissionAlert = false
     
     private let stepOptions = [50, 100, 200, 500, 1000, 5000]
     
@@ -35,7 +36,17 @@ struct StepsConfigView: View {
             if !healthKitManager.isAuthorized {
                 Button(action: {
                     Task {
+                        print("🔘 Connect button pressed - requesting authorization")
                         await healthKitManager.requestHealthKitAuthorization()
+                        
+                        print("🔄 Re-checking permission after connect button...")
+                        // Check permission after requesting
+                        let hasPermission = await healthKitManager.checkStepPermissionIndirectly()
+                        print("🔍 Connect button permission result: \(hasPermission)")
+                        
+                        if !hasPermission {
+                            showingPermissionAlert = true
+                        }
                     }
                 }) {
                     HStack {
@@ -98,14 +109,24 @@ struct StepsConfigView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(coordinator.canProceed() ? Color.blue : Color.gray)
+                    .background((coordinator.canProceed() && healthKitManager.isAuthorized) ? Color.blue : Color.gray)
                     .cornerRadius(12)
             }
-            .disabled(!coordinator.canProceed())
+            .disabled(!coordinator.canProceed() || !healthKitManager.isAuthorized)
             .padding(.horizontal)
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        .alert("Health Data Access Required", isPresented: $showingPermissionAlert) {
+            Button("Open Settings") {
+                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsUrl)
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("To continue, please enable step data access in Settings > Privacy & Security > Health > ColdWater")
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
@@ -120,9 +141,31 @@ struct StepsConfigView: View {
         }
         .onAppear {
             coordinator.preferences.stepGoal = selectedSteps
-            if healthKitManager.isAuthorized {
-                Task {
+            
+            Task {
+                print("📱 StepsConfigView onAppear - starting permission flow")
+                
+                // Check permission indirectly first
+                let hasPermission = await healthKitManager.checkStepPermissionIndirectly()
+                print("🔍 Initial permission check result: \(hasPermission)")
+                
+                if !hasPermission {
+                    print("📝 Requesting HealthKit authorization...")
+                    // Request authorization if we don't have permission
+                    await healthKitManager.requestHealthKitAuthorization()
+                    
+                    print("🔄 Re-checking permission after authorization request...")
+                    // Check again after requesting
+                    let hasPermissionAfterRequest = await healthKitManager.checkStepPermissionIndirectly()
+                    print("🔍 Permission check after request: \(hasPermissionAfterRequest)")
+                }
+                
+                // Fetch step count if we have permission
+                if healthKitManager.isAuthorized {
+                    print("✅ Fetching step count - permission confirmed")
                     await healthKitManager.fetchStepCount()
+                } else {
+                    print("❌ Not fetching step count - no permission")
                 }
             }
         }

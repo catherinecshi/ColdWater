@@ -4,8 +4,6 @@ struct GracePeriodView: View {
     @EnvironmentObject var coordinator: OnboardingCoordinator
     @State private var selectedMinutes = 5
     
-    private let timeOptions = [0, 5, 10, 15, 30, 60]
-    
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
@@ -15,7 +13,7 @@ struct GracePeriodView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 
-                Text("How much time do you want after waking up before checking your steps or location?")
+                Text(getDescriptionText())
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -23,37 +21,32 @@ struct GracePeriodView: View {
             
             Spacer()
             
-            VStack(spacing: 16) {
-                ForEach(timeOptions, id: \.self) { minutes in
-                    Button(action: {
-                        selectedMinutes = minutes
-                        coordinator.preferences.gracePeriod = TimeInterval(minutes * 60)
-                    }) {
-                        HStack {
-                            Text(minutes == 0 ? "No grace period" : "\(minutes) minutes")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            
-                            Spacer()
-                            
-                            if selectedMinutes == minutes {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.blue)
-                            } else {
-                                Image(systemName: "circle")
-                                    .foregroundColor(.gray)
-                            }
+            VStack(spacing: 20) {
+                // Minutes picker
+                VStack(spacing: 12) {
+                    Text("\(selectedMinutes) minutes")
+                        .font(.title)
+                        .fontWeight(.medium)
+                        .foregroundColor(.blue)
+                    
+                    Picker("Minutes", selection: $selectedMinutes) {
+                        ForEach(0...120, id: \.self) { minute in
+                            Text(minute == 0 ? "No delay" : "\(minute) min")
+                                .tag(minute)
                         }
-                        .padding()
-                        .background(
-                            selectedMinutes == minutes 
-                                ? Color.blue.opacity(0.1)
-                                : Color(.systemGray6)
-                        )
-                        .cornerRadius(12)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .pickerStyle(.wheel)
+                    .frame(height: 120)
+                    .onChange(of: selectedMinutes) { minutes in
+                        coordinator.preferences.gracePeriod = TimeInterval(minutes * 60)
+                    }
                 }
+                
+                // Optional description for context
+                Text(getContextText())
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
             }
             
             Spacer()
@@ -87,7 +80,34 @@ struct GracePeriodView: View {
             }
         }
         .onAppear {
-            coordinator.preferences.gracePeriod = TimeInterval(selectedMinutes * 60)
+            // Load existing preference or set default
+            if let existingGracePeriod = coordinator.preferences.gracePeriod {
+                selectedMinutes = Int(existingGracePeriod / 60)
+            } else {
+                coordinator.preferences.gracePeriod = TimeInterval(selectedMinutes * 60)
+            }
+        }
+    }
+    
+    private func getDescriptionText() -> String {
+        switch coordinator.preferences.wakeUpMethod {
+        case .steps:
+            return "How long to wait before checking your step count?"
+        case .location:
+            return "How long to wait before checking your location?"
+        case .none:
+            return "How long to wait before checking?"
+        }
+    }
+    
+    private func getContextText() -> String {
+        let method = coordinator.preferences.wakeUpMethod
+        let checkType = method == .steps ? "Step count" : "Location"
+        
+        if selectedMinutes == 0 {
+            return "\(checkType) checked immediately"
+        } else {
+            return "Gives you \(selectedMinutes) minutes to get started"
         }
     }
 }
