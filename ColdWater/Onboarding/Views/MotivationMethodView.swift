@@ -12,7 +12,7 @@ struct MotivationMethodView: View {
         case .noise:
             return "A loud alarm will play until you complete your wake-up task"
         case .none:
-            return "Just a gentle reminder with no consequences"
+            return "Just a reminder"
         }
     }
     

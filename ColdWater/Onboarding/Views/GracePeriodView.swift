@@ -9,26 +9,16 @@ struct GracePeriodView: View {
             Spacer()
             
             VStack(spacing: 16) {
-                Text("Grace Period")
+                Text(getDescriptionText())
                     .font(.title2)
                     .fontWeight(.semibold)
-                
-                Text(getDescriptionText())
-                    .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
             
-            Spacer()
-            
             VStack(spacing: 20) {
                 // Minutes picker
                 VStack(spacing: 12) {
-                    Text("\(selectedMinutes) minutes")
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .foregroundColor(.blue)
-                    
                     Picker("Minutes", selection: $selectedMinutes) {
                         ForEach(0...120, id: \.self) { minute in
                             Text(minute == 0 ? "No delay" : "\(minute) min")
@@ -92,11 +82,11 @@ struct GracePeriodView: View {
     private func getDescriptionText() -> String {
         switch coordinator.preferences.wakeUpMethod {
         case .steps:
-            return "How long to wait before checking your step count?"
+            return "How long do you need to get ready before checking your step count?"
         case .location:
-            return "How long to wait before checking your location?"
+            return "How long do you need to get ready before checking your location?"
         case .none:
-            return "How long to wait before checking?"
+            return "How long do you need to get ready for the morning?"
         }
     }
     
@@ -107,7 +97,7 @@ struct GracePeriodView: View {
         if selectedMinutes == 0 {
             return "\(checkType) checked immediately"
         } else {
-            return "Gives you \(selectedMinutes) minutes to get started"
+            return "Gives you \(selectedMinutes) minutes to get ready"
         }
     }
 }

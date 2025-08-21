@@ -24,8 +24,9 @@ struct ColdWaterApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(appState)
+            //RootView()
+                //.environmentObject(appState)
+            TestContentView()
         }
     }
 }

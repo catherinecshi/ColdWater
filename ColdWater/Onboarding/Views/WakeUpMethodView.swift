@@ -25,7 +25,7 @@ struct WakeUpMethodView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                 
-                                Text(method == .steps ? "Count steps after waking up" : "Move to a different location")
+                                Text(method == .steps ? "Count steps after waking up" : "Leave your house")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }

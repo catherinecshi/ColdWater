@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:MyLibrary"
+      name = "MyLibrary">
+      <FileRef
+         location = "group:Package.swift">
+      </FileRef>
+      <Group
+         location = "group:Sources"
+         name = "Sources">
+         <Group
+            location = "group:MyLibrary"
+            name = "MyLibrary">
+            <FileRef
+               location = "group:MyLibrary.swift">
+            </FileRef>
+         </Group>
+      </Group>
+   </Group>
    <FileRef
       location = "group:ColdWater.xcodeproj">
    </FileRef>
