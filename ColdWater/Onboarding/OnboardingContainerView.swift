@@ -11,10 +11,13 @@ struct OnboardingContainerView: View {
     
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
-            WakeUpTimeView()
+            IntroSlideShowView()
                 .environmentObject(coordinator)
                 .navigationDestination(for: OnboardingStep.self) { step in
                     switch step {
+                    case .intro:
+                        IntroSlideShowView()
+                            .environmentObject(coordinator)
                     case .wakeUpTime:
                         WakeUpTimeView()
                             .environmentObject(coordinator)

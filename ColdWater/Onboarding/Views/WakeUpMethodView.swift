@@ -8,7 +8,7 @@ struct WakeUpMethodView: View {
             Spacer()
             
             VStack(spacing: 16) {
-                Text("How do you want to check whether you've woken up?")
+                Text("How will you prove that you're awake?")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
@@ -25,7 +25,7 @@ struct WakeUpMethodView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                 
-                                Text(method == .steps ? "Count steps after waking up" : "Leave your house")
+                                Text(method == .steps ? "Walk [X] steps" : "Leave your house")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }

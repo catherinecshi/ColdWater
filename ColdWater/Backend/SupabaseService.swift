@@ -340,6 +340,21 @@ struct UserPreferencesRow: Codable {
     }
 }
 
+// MARK: - Testing Purposes
+
+struct Todo: Identifiable, Decodable {
+  var id: Int
+  var title: String
+}
+
+struct TodoInsert: Encodable {
+  var title: String
+}
+
+struct TodoUpdate: Encodable {
+  var title: String
+}
+
 // MARK: - Errors
 
 enum SupabaseError: Error, LocalizedError {

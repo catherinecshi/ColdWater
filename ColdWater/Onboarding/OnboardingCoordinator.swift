@@ -1,6 +1,7 @@
 import SwiftUI
 
 enum OnboardingStep: CaseIterable {
+    case intro
     case wakeUpTime
     case wakeUpMethod
     case stepsConfig
@@ -11,7 +12,7 @@ enum OnboardingStep: CaseIterable {
 }
 
 class OnboardingCoordinator: ObservableObject {
-    @Published var currentStep: OnboardingStep = .wakeUpTime
+    @Published var currentStep: OnboardingStep = .intro
     @Published var preferences = UserPreferences()
     @Published var navigationPath = NavigationPath()
     
@@ -23,6 +24,9 @@ class OnboardingCoordinator: ObservableObject {
     
     func nextStep() {
         switch currentStep {
+        case .intro:
+            currentStep = .wakeUpTime
+            navigationPath.append(currentStep)
         case .wakeUpTime:
             currentStep = .wakeUpMethod
             navigationPath.append(currentStep)
@@ -55,8 +59,10 @@ class OnboardingCoordinator: ObservableObject {
             navigationPath.removeLast()
             
             switch currentStep {
-            case .wakeUpTime:
+            case .intro:
                 break
+            case .wakeUpTime:
+                currentStep = .intro
             case .wakeUpMethod:
                 currentStep = .wakeUpTime
             case .stepsConfig:
@@ -75,6 +81,8 @@ class OnboardingCoordinator: ObservableObject {
     
     func canProceed() -> Bool {
         switch currentStep {
+        case .intro:
+            return true
         case .wakeUpTime:
             return preferences.hasAnyWakeUpTime()
         case .wakeUpMethod:

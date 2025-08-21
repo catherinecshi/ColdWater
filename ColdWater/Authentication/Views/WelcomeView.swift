@@ -33,7 +33,7 @@ struct WelcomeView: View {
                         .multilineTextAlignment(.center)
                     
                     // Subtitle
-                    Text("Wake Up Energetic and Ready to Go")
+                    Text("The alarm that makes you get up")
                         .font(UIConfiguration.swiftUISubtitleFont)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)

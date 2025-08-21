@@ -82,11 +82,11 @@ struct GracePeriodView: View {
     private func getDescriptionText() -> String {
         switch coordinator.preferences.wakeUpMethod {
         case .steps:
-            return "How long do you need to get ready before checking your step count?"
+            return "Your alarm rings, and you have \(selectedMinutes) minutes to walk \(coordinator.preferences.stepGoal) steps."
         case .location:
-            return "How long do you need to get ready before checking your location?"
+            return "Your alarm rings, and you have \(selectedMinutes) minutes to get out of your house"
         case .none:
-            return "How long do you need to get ready for the morning?"
+            return "Your alarm rings, and you have \(selectedMinutes) minutes to do your task"
         }
     }
     
