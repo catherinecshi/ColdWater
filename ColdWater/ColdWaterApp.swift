@@ -37,16 +37,12 @@ struct RootView: View {
     
     var body: some View {
         Group {
-            if authManager.isUserAuthenticated {
-                if appState.hasCompletedOnboarding {
-                    HomeView()
-                        .environmentObject(appState)
-                } else {
-                    OnboardingContainerView()
-                        .environmentObject(appState)
-                }
+            if authManager.isUserAuthenticated && appState.hasCompletedOnboarding {
+                HomeView()
+                    .environmentObject(appState)
             } else {
-                WelcomeView(state: appState)
+                OnboardingContainerView()
+                    .environmentObject(appState)
             }
         }
         .onReceive(authManager.$currentUser) { user in
@@ -56,6 +52,11 @@ struct RootView: View {
         .onAppear {
             // Initialize app state with current user if already logged in
             appState.currentUser = authManager.currentUser
+            
+            // Sign out authenticated users who haven't completed onboarding - this shouldn't be possible
+            if authManager.isUserAuthenticated && !appState.hasCompletedOnboarding {
+                _ = authManager.signOut()
+            }
         }
     }
 }

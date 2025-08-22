@@ -2,9 +2,7 @@ import SwiftUI
 import Combine
 import AuthenticationServices
 
-/// View model for WelcomeView
-class WelcomeViewModel: ObservableObject {
-    @Published var state: any AppStateProtocol
+class OnboardingAuthViewModel: ObservableObject {
     @Published var statusViewModel: AuthenticationStatus?
     @Published var isLoading: Bool = false
     @Published var showingAlert: Bool = false
@@ -12,12 +10,9 @@ class WelcomeViewModel: ObservableObject {
     private var cancellableBag = Set<AnyCancellable>()
     private let authManager: any AuthenticationServiceProtocol
     
-    /// Initializes with app state and authentication manager
-    init(state: any AppStateProtocol, authManager: any AuthenticationServiceProtocol = AuthenticationManager.shared) {
-        self.state = state
+    init(authManager: any AuthenticationServiceProtocol = AuthenticationManager.shared) {
         self.authManager = authManager
         
-        // Observe loading state from auth manager
         authManager.isLoadingPublisher
             .sink { [weak self] isLoading in
                 self?.isLoading = isLoading
@@ -25,41 +20,40 @@ class WelcomeViewModel: ObservableObject {
             .store(in: &cancellableBag)
     }
     
-    /// Anonymous authentication for guest log-in
-    /// Updates publisher with success or failure
-    func continueAsGuest() {
+    func continueAsGuest(completion: @escaping (CWUser?) -> Void) {
         authManager.signInAnonymously()
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [weak self] completion in
-                    if case .failure(let error) = completion {
+                receiveCompletion: { [weak self] completionResult in
+                    if case .failure(let error) = completionResult {
                         self?.handleAuthError(
                             title: "Guest Sign-In Failed",
                             message: error.localizedDescription
                         )
+                        completion(nil)
                     }
                 },
                 receiveValue: { [weak self] user in
                     if let user = user {
-                        self?.state.currentUser = user
                         self?.statusViewModel = AuthenticationStatus.logInSuccessStatus
+                        completion(user)
                     } else {
                         self?.handleAuthError(
                             title: "Error",
                             message: "Failed to sign in as guest"
                         )
+                        completion(nil)
                     }
                 }
             )
             .store(in: &cancellableBag)
     }
     
-    /// Initiates Google Sign-In authentication flow
-    func signInWithGoogle() {
-        // Get the root view controller for presentation
+    func signInWithGoogle(completion: @escaping (CWUser?) -> Void) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController else {
             handleAuthError(title: "Error", message: "Unable to present sign-in")
+            completion(nil)
             return
         }
         
@@ -67,33 +61,34 @@ class WelcomeViewModel: ObservableObject {
         
         authManager.googleSignIn(presentingViewController: presentingViewController)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                if case .failure(let error) = completion {
+            .sink(receiveCompletion: { [weak self] completionResult in
+                if case .failure(let error) = completionResult {
                     self?.handleAuthError(
                         title: "Google Sign-In Failed",
                         message: error.localizedDescription
                     )
+                    completion(nil)
                 }
             }, receiveValue: { [weak self] user in
                 if let user = user {
-                    self?.state.currentUser = user
                     self?.statusViewModel = AuthenticationStatus.logInSuccessStatus
+                    completion(user)
                 } else {
                     self?.handleAuthError(
                         title: "Error",
                         message: "Google sign-in failed"
                     )
+                    completion(nil)
                 }
             })
             .store(in: &cancellableBag)
     }
     
-    /// Initiates Apple Sign-In authentication flow
-    func signInWithApple() {
-        // Get the root view controller for presentation
+    func signInWithApple(completion: @escaping (CWUser?) -> Void) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController else {
             handleAuthError(title: "Error", message: "Unable to present sign-in")
+            completion(nil)
             return
         }
         
@@ -101,34 +96,34 @@ class WelcomeViewModel: ObservableObject {
         
         authManager.appleSignIn(presentingViewController: presentingViewController)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                if case .failure(let error) = completion {
+            .sink(receiveCompletion: { [weak self] completionResult in
+                if case .failure(let error) = completionResult {
                     self?.handleAuthError(
                         title: "Apple Sign-In Failed",
                         message: error.localizedDescription
                     )
+                    completion(nil)
                 }
             }, receiveValue: { [weak self] user in
                 if let user = user {
-                    self?.state.currentUser = user
                     self?.statusViewModel = AuthenticationStatus.logInSuccessStatus
+                    completion(user)
                 } else {
                     self?.handleAuthError(
                         title: "Error",
                         message: "Apple sign-in failed"
                     )
+                    completion(nil)
                 }
             })
             .store(in: &cancellableBag)
     }
     
-    /// Helper method to handle authentication errors
     private func handleAuthError(title: String, message: String) {
         statusViewModel = AuthenticationStatus(title: title, message: message)
         showingAlert = true
     }
     
-    /// Dismiss the current alert
     func dismissAlert() {
         showingAlert = false
         statusViewModel = nil

@@ -1,7 +1,10 @@
 import SwiftUI
+import AuthenticationServices
 
 struct OnboardingConfirmationView: View {
     @EnvironmentObject var coordinator: OnboardingCoordinator
+    @EnvironmentObject var appState: AppState
+    @StateObject private var authViewModel = OnboardingAuthViewModel()
     
     private var timeFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -51,89 +54,94 @@ struct OnboardingConfirmationView: View {
     }
     
     var body: some View {
-        VStack(spacing: 24) {
-            VStack(spacing: 16) {
-                Text("Confirm your settings")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                
-                Text("Review your preferences before continuing")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-            }
-            
-            ScrollView {
+        ZStack {
+            VStack(spacing: 24) {
                 VStack(spacing: 16) {
-                    // Wake-up time
-                    PreferenceRow(
-                        title: "Wake-up time",
-                        value: wakeUpTimeText()
-                    )
-                    
-                    // Wake-up method
-                    PreferenceRow(
-                        title: "Wake-up method",
-                        value: coordinator.preferences.wakeUpMethod?.rawValue.capitalized ?? "Not set"
-                    )
-                    
-                    // Steps or Location
-                    if coordinator.preferences.wakeUpMethod == .steps {
-                        PreferenceRow(
-                            title: "Step goal",
-                            value: coordinator.preferences.stepGoal.map { "\($0) steps" } ?? "Not set"
-                        )
-                    } else if coordinator.preferences.wakeUpMethod == .location {
-                        PreferenceRow(
-                            title: "Location",
-                            value: coordinator.preferences.location?.name ?? "Not set"
-                        )
+                    Text("Review your alarm")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                }
+                
+                ScrollView {
+                    VStack(spacing: 16) {
+                        // Settings summary
+                        settingsSummaryView
                         
-                        if let location = coordinator.preferences.location {
-                            PreferenceRow(
-                                title: "Geofence radius",
-                                value: "\(Int(location.geofenceRadius)) meters"
-                            )
+                        Spacer()
+                        
+                        // Authentication section
+                        Text("Save your preferences by logging in")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        
+                        VStack(spacing: 16) {
+                            // Authentication Buttons
+                            VStack(spacing: UIConfiguration.smallPadding) {
+                                // Email Sign In Button
+                                Button("Sign In with Email") {
+                                    coordinator.navigateToSignIn()
+                                }
+                                .buttonStyle(AuthButtonStyle.secondary)
+                                .frame(maxWidth: .infinity)
+                                
+                                // Email Sign Up Button
+                                Button("Sign Up with Email") {
+                                    coordinator.navigateToSignUp()
+                                }
+                                .buttonStyle(AuthButtonStyle.primary)
+                                .frame(maxWidth: .infinity)
+                                
+                                // Google Sign In Button
+                                Button("Sign Up with Google") {
+                                    authViewModel.signInWithGoogle { user in
+                                        if let user = user {
+                                            appState.currentUser = user
+                                            coordinator.completeOnboarding()
+                                        }
+                                    }
+                                }
+                                .buttonStyle(AuthButtonStyle.google)
+                                .disabled(authViewModel.isLoading)
+                                
+                                // Apple Sign In Button
+                                CustomAppleSignInButton {
+                                    authViewModel.signInWithApple { user in
+                                        if let user = user {
+                                            appState.currentUser = user
+                                            coordinator.completeOnboarding()
+                                        }
+                                    }
+                                }
+                                .disabled(authViewModel.isLoading)
+                                
+                                // Guest Button
+                                Button("Continue as Guest") {
+                                    authViewModel.continueAsGuest { user in
+                                        if let user = user {
+                                            appState.currentUser = user
+                                            coordinator.completeOnboarding()
+                                        }
+                                    }
+                                }
+                                .buttonStyle(AuthButtonStyle.guest)
+                                .disabled(authViewModel.isLoading)
+                            }
                         }
                     }
-                    
-                    // Grace period
-                    PreferenceRow(
-                        title: "Grace period",
-                        value: gracePeriodText()
-                    )
-                    
-                    // Motivation method
-                    PreferenceRow(
-                        title: "Motivation method",
-                        value: coordinator.preferences.motivationMethod?.rawValue.capitalized ?? "Not set"
-                    )
                 }
             }
-            
-            VStack(spacing: 12) {
-                Button(action: {
-                    coordinator.completeOnboarding()
-                }) {
-                    Text("Complete Setup")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(12)
-                }
+            .padding()
                 
-                Button(action: {
-                    coordinator.previousStep()
-                }) {
-                    Text("Go Back")
-                        .font(.body)
-                        .foregroundColor(.blue)
-                }
+            // Loading Overlay
+            if authViewModel.isLoading {
+                Color.black.opacity(0.3)
+                    .ignoresSafeArea()
+                
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: UIConfiguration.primaryColor))
+                    .scaleEffect(1.5)
             }
-            .padding(.horizontal)
         }
-        .padding()
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -147,6 +155,105 @@ struct OnboardingConfirmationView: View {
                 }
             }
         }
+        .alert(
+            authViewModel.statusViewModel?.title ?? "Error",
+            isPresented: $authViewModel.showingAlert
+        ) {
+            Button("OK") {
+                authViewModel.dismissAlert()
+            }
+        } message: {
+            Text(authViewModel.statusViewModel?.message ?? "An error occurred")
+        }
+    }
+    
+    private var settingsSummaryView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(generateSummaryText())
+                .font(.body)
+                .lineLimit(nil)
+                .multilineTextAlignment(.leading)
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
+        }
+    }
+    
+    private func generateSummaryText() -> AttributedString {
+        let wakeUpTime = wakeUpTimeText()
+        let gracePeriodMinutes = gracePeriodMinutesText()
+        
+        var summaryText = ""
+        if gracePeriodMinutes == "no grace period" {
+            summaryText = "At "
+        } else {
+            summaryText = "I will wake up at "
+        }
+        var attributedString = AttributedString(summaryText)
+        
+        // Add wake up time in bold
+        var boldTime = AttributedString(wakeUpTime)
+        boldTime.font = .body.bold()
+        attributedString.append(boldTime)
+        
+        // Add method part
+        if coordinator.preferences.wakeUpMethod == .steps {
+            let stepGoal = coordinator.preferences.stepGoal ?? 0
+            
+            if gracePeriodMinutes == "no grace period" {
+                attributedString.append(AttributedString(", I will have taken "))
+            } else {
+                attributedString.append(AttributedString(" and take "))
+            }
+            
+            var boldSteps = AttributedString("\(stepGoal) steps")
+            boldSteps.font = .body.bold()
+            attributedString.append(boldSteps)
+            
+        } else if coordinator.preferences.wakeUpMethod == .location {
+            var locationName = coordinator.preferences.location?.name ?? "my location"
+            if locationName == "Custom Location" {
+                locationName = "my location"
+            }
+            
+            if gracePeriodMinutes == "no grace period" {
+                attributedString.append(AttributedString(", I will have left "))
+            } else {
+                attributedString.append(AttributedString(" and leave "))
+            }
+            
+            var boldLocation = AttributedString(locationName)
+            boldLocation.font = .body.bold()
+            attributedString.append(boldLocation)
+        }
+        
+        // Add grace period
+        if gracePeriodMinutes != "no grace period" {
+            attributedString.append(AttributedString(" within "))
+            
+            var boldGracePeriod = AttributedString(gracePeriodMinutes)
+            boldGracePeriod.font = .body.bold()
+            attributedString.append(boldGracePeriod)
+        }
+        
+        // Add motivation method
+        if coordinator.preferences.motivationMethod == .noise {
+            attributedString.append(AttributedString(" or my alarm will keep ringing."))
+        } else if coordinator.preferences.motivationMethod == .phone {
+            attributedString.append(AttributedString(" or my phone will auatomatically call "))
+        } else if coordinator.preferences.motivationMethod == .money {
+            attributedString.append(AttributedString(" or I will give ___ to charity."))
+        } else if coordinator.preferences.motivationMethod == .none {
+            attributedString.append(AttributedString("."))
+        }
+        
+        return attributedString
+    }
+    
+    private func gracePeriodMinutesText() -> String {
+        guard let gracePeriod = coordinator.preferences.gracePeriod else { return "no time limit" }
+        let minutes = Int(gracePeriod / 60)
+        return minutes == 0 ? "no grace period" : "\(minutes) minutes"
     }
 }
 

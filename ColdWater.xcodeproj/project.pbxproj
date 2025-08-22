@@ -24,7 +24,6 @@
 		FB5EC1C82E2C7EFB00107E24 /* AppleSignInHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */; };
 		FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */; };
 		FB5EC1CD2E2C7F6600107E24 /* SingletonRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */; };
-		FB5EC1CF2E2C856700107E24 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */; };
 		FB5EC1D32E2C85D100107E24 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1D22E2C85D100107E24 /* AppState.swift */; };
 		FB5EC1D52E2C85F500107E24 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1D42E2C85F500107E24 /* WelcomeView.swift */; };
 		FB5EC1D82E2C86A000107E24 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1D72E2C86A000107E24 /* AppleSignInButton.swift */; };
@@ -70,6 +69,7 @@
 		FBDDCEB42E575E960085B7E4 /* UserPreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB32E575E960085B7E4 /* UserPreferencesManager.swift */; };
 		FBDDCEB72E578F5A0085B7E4 /* AlarmKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB62E578F5A0085B7E4 /* AlarmKitManager.swift */; };
 		FBDDCEB92E5799DF0085B7E4 /* IntroSlideShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB82E5799DF0085B7E4 /* IntroSlideShowView.swift */; };
+		FBDDCEBB2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEBA2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +108,6 @@
 		FB5EC1C72E2C7EFB00107E24 /* AppleSignInHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelpers.swift; sourceTree = "<group>"; };
 		FB5EC1C92E2C7F2D00107E24 /* CWUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWUser.swift; sourceTree = "<group>"; };
 		FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonRegistry.swift; sourceTree = "<group>"; };
-		FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		FB5EC1D22E2C85D100107E24 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FB5EC1D42E2C85F500107E24 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		FB5EC1D72E2C86A000107E24 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
@@ -148,6 +147,7 @@
 		FBDDCEB32E575E960085B7E4 /* UserPreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesManager.swift; sourceTree = "<group>"; };
 		FBDDCEB62E578F5A0085B7E4 /* AlarmKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmKitManager.swift; sourceTree = "<group>"; };
 		FBDDCEB82E5799DF0085B7E4 /* IntroSlideShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSlideShowView.swift; sourceTree = "<group>"; };
+		FBDDCEBA2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,8 +296,6 @@
 		FB5EC1D12E2C859200107E24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FB5EC1D42E2C85F500107E24 /* WelcomeView.swift */,
-				FB5EC1CE2E2C856700107E24 /* WelcomeViewModel.swift */,
 				FB5EC1DB2E2C88BC00107E24 /* SignInView.swift */,
 				FB5EC1E12E2C8F2F00107E24 /* SignInViewModel.swift */,
 				FB5EC1DD2E2C88C300107E24 /* SignUpView.swift */,
@@ -345,6 +343,7 @@
 		FB5EC2012E2D8DE400107E24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FB5EC1D42E2C85F500107E24 /* WelcomeView.swift */,
 				FBDDCEB82E5799DF0085B7E4 /* IntroSlideShowView.swift */,
 				FB5EC2002E2D8DE400107E24 /* WakeUpTimeView.swift */,
 				FB5EC20D2E2D90AE00107E24 /* WakeUpMethodView.swift */,
@@ -363,6 +362,7 @@
 				FB5EC2012E2D8DE400107E24 /* Views */,
 				FB5EC2022E2D8DE400107E24 /* OnboardingContainerView.swift */,
 				FB5EC2032E2D8DE400107E24 /* OnboardingCoordinator.swift */,
+				FBDDCEBA2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -571,7 +571,6 @@
 				FBDDCEB42E575E960085B7E4 /* UserPreferencesManager.swift in Sources */,
 				FB5EC2102E2D90B400107E24 /* StepsConfigView.swift in Sources */,
 				FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */,
-				FB5EC1CF2E2C856700107E24 /* WelcomeViewModel.swift in Sources */,
 				FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */,
 				FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */,
 				FB5EC1DE2E2C88C300107E24 /* SignUpView.swift in Sources */,
@@ -587,6 +586,7 @@
 				FB5EC1E62E2C91FF00107E24 /* AccountConversionView.swift in Sources */,
 				FB5EC1E82E2C92C900107E24 /* SettingsViewModel.swift in Sources */,
 				FB5EC1CD2E2C7F6600107E24 /* SingletonRegistry.swift in Sources */,
+				FBDDCEBB2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift in Sources */,
 				FB0AEAE32E2420C300CB812A /* LocationViewModel.swift in Sources */,
 				FB5EC2062E2D8DE500107E24 /* OnboardingContainerView.swift in Sources */,
 				FBDDCEB22E575E8B0085B7E4 /* SupabaseService.swift in Sources */,
