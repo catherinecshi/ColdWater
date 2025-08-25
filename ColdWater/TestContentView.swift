@@ -7,6 +7,7 @@ struct TestContentView: View {
     @State private var testResults: [String] = []
     @State private var showingResults = false
     @State private var isRunningTests = false
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         NavigationView {
@@ -23,6 +24,12 @@ struct TestContentView: View {
             .navigationTitle("Alarm Tests")
             .sheet(isPresented: $showingResults) {
                 testResultsSheet
+            }
+            .fullScreenCover(item: $alarmManager.showingForegroundAlarm) { alarm in
+                ForegroundAlarmView(alarm: alarm)
+            }
+            .onChange(of: scenePhase) { oldPhase, newPhase in
+                handleScenePhaseChange(from: oldPhase, to: newPhase)
             }
         }
     }
@@ -112,6 +119,10 @@ struct TestContentView: View {
             
             TestButton(title: "Test Later Alarm (120s)", color: .blue) {
                 await testLaterAlarm()
+            }
+            
+            TestButton(title: "Test Countdown Alarm (10s)", color: .orange) {
+                await testCountdownAlarm()
             }
             
             // Widget Log Button
@@ -254,6 +265,17 @@ struct TestContentView: View {
         }
     }
     
+    private func testCountdownAlarm() async {
+        addTestResult("Testing countdown alarm (10 seconds)...")
+        
+        do {
+            try await alarmManager.createTimer(title: "Test Countdown Alarm", duration: 10.0)
+            addTestResult("✅ Countdown alarm scheduled - will fire in 10 seconds")
+            
+        } catch {
+            addTestResult("❌ Countdown alarm failed: \(error.localizedDescription)")
+        }
+    }
     
     private func deleteAlarm(_ id: UUID) {
         do {
@@ -279,6 +301,47 @@ struct TestContentView: View {
         }.string(from: Date())
         
         testResults.append("[\(timestamp)] \(result)")
+    }
+    
+    private func handleScenePhaseChange(from oldPhase: ScenePhase, to newPhase: ScenePhase) {
+        print("📱 [SCENE] Scene phase changed from \(oldPhase) to \(newPhase)")
+        
+        // Check if user is exiting app while foreground alarm is active
+        if oldPhase == .active && (newPhase == .inactive || newPhase == .background) {
+            if let activeAlarm = alarmManager.showingForegroundAlarm {
+                print("🚨 [SCENE] User exiting app during active foreground alarm!")
+                print("⏱️ [SCENE] Adding no delay before scheduling backup alarm...")
+                
+                // Add delay to ensure app fully transitions to background before scheduling backup alarm
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    print("⏱️ [SCENE] Delay complete - now scheduling backup alarm")
+                    Task {
+                        await scheduleBackupCountdownAlarm(for: activeAlarm)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func scheduleBackupCountdownAlarm(for alarm: CWAlarm) async {
+        let timestamp = DateFormatter().apply { $0.timeStyle = .medium }.string(from: Date())
+        print("⚠️ [BACKUP] [\(timestamp)] Scheduling backup countdown alarm for \(alarm.id)")
+        
+        do {
+            // Clear the foreground alarm first
+            alarmManager.showingForegroundAlarm = nil
+            
+            // Use CWAlarmManager to create backup countdown alarm
+            try await alarmManager.createBackupTimer(for: alarm, duration: 5.0)
+            
+            addTestResult("⚠️ Backup countdown alarm scheduled (5 seconds) for escaped alarm")
+            let successTimestamp = DateFormatter().apply { $0.timeStyle = .medium }.string(from: Date())
+            print("✅ [BACKUP] [\(successTimestamp)] Successfully scheduled backup countdown alarm via CWAlarmManager")
+            
+        } catch {
+            print("❌ [BACKUP] Failed to schedule backup countdown alarm: \(error)")
+            addTestResult("❌ Failed to schedule backup alarm: \(error.localizedDescription)")
+        }
     }
 }
 

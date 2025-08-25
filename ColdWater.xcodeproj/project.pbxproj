@@ -71,6 +71,7 @@
 		FBB852552E5A474300107857 /* CWAlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */; };
 		FBB852562E5A474D00107857 /* CWAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8522A2E59171A00107857 /* CWAlarm.swift */; };
 		FBB852572E5A485200107857 /* SingletonRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */; };
+		FBB852682E5CDE5600107857 /* ForegroundAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB852672E5CDE5600107857 /* ForegroundAlarmView.swift */; };
 		FBDDCE9D2E2E87140085B7E4 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */; };
 		FBDDCEA02E50E2BB0085B7E4 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FBDDCE9F2E50E2BB0085B7E4 /* Auth */; };
 		FBDDCEA22E50E2BB0085B7E4 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FBDDCEA12E50E2BB0085B7E4 /* Functions */; };
@@ -184,6 +185,7 @@
 		FBB852332E5A428500107857 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		FBB852352E5A428600107857 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		FBB8524D2E5A441300107857 /* AlarmLiveActivityExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlarmLiveActivityExtension.entitlements; sourceTree = "<group>"; };
+		FBB852672E5CDE5600107857 /* ForegroundAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundAlarmView.swift; sourceTree = "<group>"; };
 		FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		FBDDCEB12E575E8B0085B7E4 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 		FBDDCEB32E575E960085B7E4 /* UserPreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesManager.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */,
 				FBB852282E5916DB00107857 /* CWAlarmMetadata.swift */,
 				FBB8522A2E59171A00107857 /* CWAlarm.swift */,
+				FBB852672E5CDE5600107857 /* ForegroundAlarmView.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				FB5EC1C62E2C7ECE00107E24 /* AuthenticationStatus.swift in Sources */,
 				FB652F382E2C393700B323F1 /* HomeView.swift in Sources */,
 				FB5EC2122E2D90BA00107E24 /* LocationConfigView.swift in Sources */,
+				FBB852682E5CDE5600107857 /* ForegroundAlarmView.swift in Sources */,
 				FB5EC1D32E2C85D100107E24 /* AppState.swift in Sources */,
 				FB5EC1E42E2C91F200107E24 /* AccountConversionViewModel.swift in Sources */,
 				FB5EC1E22E2C8F2F00107E24 /* SignInViewModel.swift in Sources */,

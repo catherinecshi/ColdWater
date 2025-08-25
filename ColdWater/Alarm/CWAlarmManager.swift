@@ -3,6 +3,7 @@ import SwiftUI
 import AlarmKit
 import ActivityKit
 import Combine
+import UIKit
 
 // MARK: - Custom Errors
 enum CWAlarmError: Error, LocalizedError {
@@ -33,6 +34,7 @@ class CWAlarmManager: Resettable, ObservableObject {
     @Published private(set) var activeAlarms: [CWAlarm] = []
     @Published private(set) var recentAlarms: [CWAlarm] = []
     @Published private(set) var isLoading = false
+    @Published var showingForegroundAlarm: CWAlarm? = nil
     @Published var error: Error? = nil {
         didSet {
             if error != nil {
@@ -48,6 +50,10 @@ class CWAlarmManager: Resettable, ObservableObject {
             }
         }
     }
+    
+    // Countdown tracking
+    @Published private(set) var countdownTimers: [UUID: TimeInterval] = [:]
+    private var countdownUpdateTimers: [UUID: Timer] = [:]
     
     // Configuration
     private let groupId = "group.coldwateralarm"
@@ -96,9 +102,15 @@ class CWAlarmManager: Resettable, ObservableObject {
         activeAlarms = []
         recentAlarms = []
         isLoading = false
+        showingForegroundAlarm = nil
         error = nil
         showError = false
         cancellables.removeAll()
+        
+        // Clean up countdown timers
+        countdownUpdateTimers.values.forEach { $0.invalidate() }
+        countdownUpdateTimers.removeAll()
+        countdownTimers.removeAll()
     }
     
     // MARK: - Initialization
@@ -201,14 +213,48 @@ class CWAlarmManager: Resettable, ObservableObject {
                     switch alarm.state {
                     case .alerting:
                         print("🚨🔥 [FIRE] ALARM IS ALERTING! Alarm \(alarm.id) has FIRED!")
-                        print("🚨🔥 [FIRE] - Schedule: \(alarm.schedule, default: "none")")
-                        print("🚨🔥 [FIRE] - Countdown Duration: \(alarm.countdownDuration, default: "none")")
+                        
+                        // Always set the foreground alarm - the view layer will determine if app is active
+                        await MainActor.run {
+                            print("🚨🔥 [FIRE] Alarm is alerting - setting up for potential foreground display")
+                            if let cwAlarm = self.activeAlarms.first(where: { $0.id == alarm.id }) {
+                                self.showingForegroundAlarm = cwAlarm
+                            }
+                        }
+                        
                     case .countdown:
                         print("⏲️🔥 [FIRE] Alarm \(alarm.id) entered COUNTDOWN mode!")
+                        
+                        await MainActor.run {
+                            if let cwAlarm = self.activeAlarms.first(where: { $0.id == alarm.id }) {
+                                // Start countdown tracking if we have countdown duration
+                                if let countdownDuration = alarm.countdownDuration {
+                                    self.startCountdownTracking(for: alarm.id, duration: countdownDuration.postAlert ?? TimeInterval(10))
+                                }
+                            }
+                        }
+                        
                     case .paused:
                         print("⏸️🔥 [FIRE] Alarm \(alarm.id) is PAUSED!")
+                        await MainActor.run {
+                            if let cwAlarm = self.activeAlarms.first(where: { $0.id == alarm.id }) {
+                                self.showingForegroundAlarm = cwAlarm
+                            }
+                            // Pause countdown tracking
+                            self.pauseCountdownTracking(for: alarm.id)
+                        }
+                        
                     case .scheduled:
                         print("📅 [OBSERVE] Alarm \(alarm.id) is scheduled (waiting to fire)")
+                        await MainActor.run {
+                            // Clear foreground alarm if this alarm was dismissed
+                            if self.showingForegroundAlarm?.id == alarm.id {
+                                self.showingForegroundAlarm = nil
+                            }
+                            // Stop countdown tracking when alarm is dismissed/stopped
+                            self.stopCountdownTracking(for: alarm.id)
+                        }
+                        
                     @unknown default:
                         print("❓ [OBSERVE] Unknown state for alarm \(alarm.id): \(alarm.state)")
                     }
@@ -414,6 +460,21 @@ class CWAlarmManager: Resettable, ObservableObject {
     }
     
     func pauseAlarm(_ alarmID: UUID) throws {
+        // Check if the alarm supports pausing before attempting to pause
+        guard let cwAlarm = activeAlarms.first(where: { $0.id == alarmID }) else {
+            print("❌ [PAUSE] Alarm \(alarmID) not found in active alarms")
+            throw CWAlarmError.invalidTime
+        }
+        
+        let alarmInstance = cwAlarm.alarm
+        
+        // Only allow pausing if alarm is in countdown state and has countdown duration
+        guard alarmInstance.state == .countdown,
+              alarmInstance.countdownDuration != nil else {
+            print("❌ [PAUSE] Alarm \(alarmID) cannot be paused - not in countdown state or no countdown duration")
+            throw CWAlarmError.invalidTime
+        }
+        
         try alarmManager.pause(id: alarmID)
         updateAlarmState(alarmID, to: .paused)
     }
@@ -421,6 +482,7 @@ class CWAlarmManager: Resettable, ObservableObject {
     func resumeAlarm(_ alarmID: UUID) throws {
         try alarmManager.resume(id: alarmID)
         updateAlarmState(alarmID, to: .countdown)
+        resumeCountdownTracking(for: alarmID)
     }
     
     func deleteAlarm(_ alarmID: UUID) throws {
@@ -460,7 +522,238 @@ class CWAlarmManager: Resettable, ObservableObject {
     }
 }
 
-// MARK: - Extensions
+// MARK: - Timer Functions
+@available(iOS 26.0, *)
+extension CWAlarmManager {
+    
+    /// Create a traditional timer that counts down from the specified duration
+    @MainActor
+    func createTimer(title: String, duration: TimeInterval, metadata: CWAlarmMetadata? = nil) async throws {
+        print("⏰ [TIMER] Creating timer: '\(title)' with \(duration)s duration")
+        
+        let timerMetadata = metadata ?? CWAlarmMetadata(
+            title: title,
+            wakeUpMethod: .steps,
+            stepGoal: 50,
+            gracePeriod: nil,
+            motivationMethod: .noise
+        )
+        
+        try await scheduleTimer(
+            id: UUID(),
+            metadata: timerMetadata,
+            duration: duration
+        )
+        
+        print("✅ [TIMER] Successfully scheduled timer")
+    }
+    
+    /// Create a timer from existing recent timer (restart functionality)
+    @MainActor
+    func restartRecentTimer(timerId: UUID) async throws {
+        guard let recentTimer = recentAlarms.first(where: { $0.id == timerId }) else {
+            throw CWAlarmError.invalidTime
+        }
+        
+        guard let duration = recentTimer.postTimerDuration else {
+            throw CWAlarmError.invalidTime
+        }
+        
+        print("🔄 [TIMER] Restarting recent timer: '\(recentTimer.metadata.title)' with \(duration)s")
+        
+        try await scheduleTimer(
+            id: UUID(), // New ID for new timer instance
+            metadata: recentTimer.metadata,
+            duration: duration
+        )
+        
+        print("✅ [TIMER] Successfully restarted timer")
+    }
+    
+    /// Create a backup timer that starts immediately (for escape prevention)
+    @MainActor
+    func createBackupTimer(for originalAlarm: CWAlarm, duration: TimeInterval = 10.0) async throws {
+        print("⚠️ [BACKUP TIMER] Creating backup timer with \(duration)s duration")
+        
+        let backupMetadata = CWAlarmMetadata(
+            title: "⚠️ BACKUP: " + originalAlarm.metadata.title,
+            wakeUpMethod: originalAlarm.metadata.wakeUpMethod,
+            stepGoal: originalAlarm.metadata.stepGoal,
+            location: originalAlarm.metadata.location,
+            gracePeriod: originalAlarm.metadata.gracePeriod,
+            motivationMethod: .noise // Force noise for backup
+        )
+        
+        try await scheduleTimer(
+            id: UUID(),
+            metadata: backupMetadata,
+            duration: duration
+        )
+        
+        print("✅ [BACKUP TIMER] Successfully scheduled backup timer")
+    }
+    
+    // MARK: - Core Timer Scheduling
+    
+    private func scheduleTimer(
+        id: UUID,
+        metadata: CWAlarmMetadata,
+        duration: TimeInterval
+    ) async throws {
+        try await checkAuthorization()
+        
+        let presentation = createTimerPresentation(metadata, duration: duration)
+        
+        let attributes = AlarmAttributes(
+            presentation: presentation,
+            metadata: metadata,
+            tintColor: .blue
+        )
+        
+        // Use the timer convenience initializer
+        let configuration = AlarmManager.AlarmConfiguration.timer(
+            duration: duration,
+            attributes: attributes,
+            stopIntent: StopIntent(alarmID: id),
+            secondaryIntent: RepeatIntent(alarmID: id), // Allows restarting the timer
+            sound: .default
+        )
+        
+        let alarm = try await alarmManager.schedule(id: id, configuration: configuration)
+        
+        await MainActor.run {
+            activeAlarms.removeAll { $0.id == alarm.id }
+            let cwAlarm = CWAlarm(alarm: alarm, metadata: metadata)
+            activeAlarms.insert(cwAlarm, at: 0)
+            saveActiveAlarms()
+            
+            // Add to recent timers for restart functionality (if not already there)
+            if !recentAlarms.contains(where: { $0.metadata.title == metadata.title && $0.postTimerDuration == duration }) {
+                let recentTimer = CWAlarm(alarm: alarm, metadata: metadata, isRecent: true)
+                recentAlarms.insert(recentTimer, at: 0)
+                saveRecentAlarms()
+            }
+        }
+    }
+    
+    // MARK: - Timer-Specific Presentation
+    
+    private func createTimerPresentation(_ metadata: CWAlarmMetadata, duration: TimeInterval) -> AlarmPresentation {
+        let hasMotivation = metadata.motivationMethod != nil && metadata.motivationMethod != .none
+        
+        let alert = AlarmPresentation.Alert(
+            title: LocalizedStringResource(stringLiteral: metadata.title + " - Timer Complete!"),
+            stopButton: .stopButton,
+            secondaryButton: hasMotivation ? .repeatButton : nil,
+            secondaryButtonBehavior: hasMotivation ? .countdown : nil
+        )
+        
+        // Timer always has countdown state
+        let countdown = AlarmPresentation.Countdown(
+            title: LocalizedStringResource(stringLiteral: metadata.title + " - \(formatDuration(duration))"),
+            pauseButton: .pauseButton
+        )
+        
+        let paused = AlarmPresentation.Paused(
+            title: LocalizedStringResource(stringLiteral: metadata.title + " - Paused"),
+            resumeButton: .resumeButton
+        )
+        
+        return AlarmPresentation(alert: alert, countdown: countdown, paused: paused)
+    }
+    
+    // MARK: - Computed Properties for Timers
+    
+    var activeTimers: [CWAlarm] {
+        activeAlarms.filter { $0.alarm.schedule == nil && $0.alarm.countdownDuration != nil }
+    }
+    
+    var recentTimers: [CWAlarm] {
+        recentAlarms.filter { $0.alarm.schedule == nil && $0.alarm.countdownDuration != nil }
+    }
+    
+    // MARK: - Countdown Management
+    
+    func getCountdownTimeRemaining(for alarmID: UUID) -> TimeInterval? {
+        return countdownTimers[alarmID]
+    }
+    
+    private func startCountdownTracking(for alarmID: UUID, duration: TimeInterval) {
+        print("⏲️ [COUNTDOWN] Starting countdown tracking for alarm \(alarmID) with duration \(duration)s")
+        
+        // Set initial time
+        countdownTimers[alarmID] = duration
+        
+        // Clean up any existing timer for this alarm
+        countdownUpdateTimers[alarmID]?.invalidate()
+        
+        // Start the countdown timer
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if let currentTime = self.countdownTimers[alarmID], currentTime > 0 {
+                self.countdownTimers[alarmID] = currentTime - 1
+            } else {
+                // Time's up, stop tracking
+                self.stopCountdownTracking(for: alarmID)
+            }
+        }
+        
+        countdownUpdateTimers[alarmID] = timer
+    }
+    
+    private func stopCountdownTracking(for alarmID: UUID) {
+        print("⏲️ [COUNTDOWN] Stopping countdown tracking for alarm \(alarmID)")
+        
+        countdownUpdateTimers[alarmID]?.invalidate()
+        countdownUpdateTimers.removeValue(forKey: alarmID)
+        countdownTimers.removeValue(forKey: alarmID)
+    }
+    
+    private func pauseCountdownTracking(for alarmID: UUID) {
+        print("⏸️ [COUNTDOWN] Pausing countdown tracking for alarm \(alarmID)")
+        countdownUpdateTimers[alarmID]?.invalidate()
+        countdownUpdateTimers.removeValue(forKey: alarmID)
+    }
+    
+    private func resumeCountdownTracking(for alarmID: UUID) {
+        print("▶️ [COUNTDOWN] Resuming countdown tracking for alarm \(alarmID)")
+        
+        guard let timeRemaining = countdownTimers[alarmID], timeRemaining > 0 else {
+            stopCountdownTracking(for: alarmID)
+            return
+        }
+        
+        // Start timer again with current remaining time
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if let currentTime = self.countdownTimers[alarmID], currentTime > 0 {
+                self.countdownTimers[alarmID] = currentTime - 1
+            } else {
+                self.stopCountdownTracking(for: alarmID)
+            }
+        }
+        
+        countdownUpdateTimers[alarmID] = timer
+    }
+    
+    // MARK: - Helper Functions
+    
+    private func formatDuration(_ duration: TimeInterval) -> String {
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        
+        if minutes > 0 {
+            return "\(minutes)m \(seconds)s"
+        } else {
+            return "\(seconds)s"
+        }
+    }
+}
+
+// MARK: - Other Type Extensions
+
 @available(iOS 26.0, *)
 extension Date {
     var time: Alarm.Schedule.Relative.Time? {

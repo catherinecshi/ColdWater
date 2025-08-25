@@ -84,7 +84,7 @@ struct CWAlarm: Codable, Identifiable, Sendable {
                 return
                 
             case .countdown:
-                guard let duration = timerDuration else {
+                guard let duration = preTimerDuration else {
                     return 
                 }
                 newMode = .countdown(.init(
@@ -96,7 +96,7 @@ struct CWAlarm: Codable, Identifiable, Sendable {
                 return
                 
             case .paused:
-                guard let duration = timerDuration else {
+                guard let duration = preTimerDuration else {
                     return 
                 }
                 newMode = .paused(.init(totalCountdownDuration: duration, previouslyElapsedDuration: 0))
@@ -115,7 +115,7 @@ struct CWAlarm: Codable, Identifiable, Sendable {
         
         switch (oldAlarm.state, alarm.state) {
         case (.scheduled, .countdown):
-            guard let duration = timerDuration else { return }
+            guard let duration = preTimerDuration else { return }
             newMode = .countdown(.init(
                 totalCountdownDuration: duration,
                 previouslyElapsedDuration: 0,
@@ -185,9 +185,31 @@ extension CWAlarm {
         }
     }
     
-    var timerDuration: TimeInterval? {
+    var preTimerDuration: TimeInterval? {
         guard let countdownDuration = alarm.countdownDuration else { return nil }
         return countdownDuration.preAlert
+    }
+}
+
+@available(iOS 26.0, *)
+extension CWAlarm {
+    /// Check if this alarm is actually a timer (no schedule, has countdown)
+    var isTimer: Bool {
+        return alarm.schedule == nil && alarm.countdownDuration != nil
+    }
+    
+    /// Get the original timer duration (for restart functionality)
+    var postTimerDuration: TimeInterval? {
+        guard isTimer else { return nil }
+        // For timers, the postAlert contains the countdown duration
+        return alarm.countdownDuration?.postAlert ?? alarm.countdownDuration?.preAlert
+    }
+}
+
+@available(iOS 26.0, *)
+extension AlarmButton {
+    static var repeatButton: Self {
+        AlarmButton(text: "Restart", textColor: .white, systemImageName: "repeat")
     }
 }
 
