@@ -24,8 +24,54 @@ struct ColdWaterApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(appState)
+            if #available(iOS 26.0, *) {
+                TestContentView()
+                    .environmentObject(appState)
+                    .onOpenURL { url in
+                        handleDeepLink(url)
+                    }
+            } else {
+                RootView()
+                    .environmentObject(appState)
+                    .onOpenURL { url in
+                        handleDeepLink(url)
+                    }
+            }
+        }
+    }
+    
+    private func handleDeepLink(_ url: URL) {
+        print("🔗 [DEEPLINK] Received URL: \(url)")
+        print("🔗 [DEEPLINK] Full URL: \(url.absoluteString)")
+        print("🔗 [DEEPLINK] Scheme: \(url.scheme ?? "nil")")
+        print("🔗 [DEEPLINK] Host: \(url.host ?? "nil")")
+        print("🔗 [DEEPLINK] Path: \(url.path)")
+        print("🔗 [DEEPLINK] Path components: \(url.pathComponents)")
+        
+        guard url.scheme == "coldwater" else {
+            print("🔗 [DEEPLINK] ❌ Unknown scheme: \(url.scheme ?? "nil")")
+            return
+        }
+        
+        if url.host == "alarm" {
+            if let alarmID = url.pathComponents.last, alarmID != "/" {
+                print("🔗 [DEEPLINK] ✅ Opening alarm: \(alarmID)")
+                // Show an alert to confirm it worked
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let window = windowScene.windows.first {
+                        let alert = UIAlertController(title: "Dynamic Island Tap", 
+                                                    message: "Successfully opened alarm: \\(alarmID)", 
+                                                    preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        window.rootViewController?.present(alert, animated: true)
+                    }
+                }
+            } else {
+                print("🔗 [DEEPLINK] ❌ No alarm ID found in path")
+            }
+        } else {
+            print("🔗 [DEEPLINK] ❌ Unknown host: \(url.host ?? "nil")")
         }
     }
 }

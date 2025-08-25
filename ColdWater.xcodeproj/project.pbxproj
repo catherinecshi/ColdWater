@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,6 +58,19 @@
 		FB652F3C2E2C3AA700B323F1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */; };
 		FB652F3E2E2C3B6800B323F1 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */; };
 		FB652F422E2C3F3B00B323F1 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */; };
+		FBB852272E590C1F00107857 /* TestContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB852262E590C1F00107857 /* TestContentView.swift */; };
+		FBB852292E5916DB00107857 /* CWAlarmMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB852282E5916DB00107857 /* CWAlarmMetadata.swift */; };
+		FBB8522B2E59171A00107857 /* CWAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8522A2E59171A00107857 /* CWAlarm.swift */; };
+		FBB8522D2E5918DD00107857 /* AlarmAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8522C2E5918DD00107857 /* AlarmAppIntents.swift */; };
+		FBB852342E5A428600107857 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB852332E5A428500107857 /* WidgetKit.framework */; };
+		FBB852362E5A428600107857 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB852352E5A428600107857 /* SwiftUI.framework */; };
+		FBB852472E5A428800107857 /* AlarmLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FBB852322E5A428500107857 /* AlarmLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FBB8524E2E5A45BD00107857 /* CWAlarmMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB852282E5916DB00107857 /* CWAlarmMetadata.swift */; };
+		FBB8524F2E5A45F400107857 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC2042E2D8DE400107E24 /* UserPreferences.swift */; };
+		FBB852542E5A472900107857 /* AlarmAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8522C2E5918DD00107857 /* AlarmAppIntents.swift */; };
+		FBB852552E5A474300107857 /* CWAlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */; };
+		FBB852562E5A474D00107857 /* CWAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8522A2E59171A00107857 /* CWAlarm.swift */; };
+		FBB852572E5A485200107857 /* SingletonRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EC1CC2E2C7F6600107E24 /* SingletonRegistry.swift */; };
 		FBDDCE9D2E2E87140085B7E4 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */; };
 		FBDDCEA02E50E2BB0085B7E4 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FBDDCE9F2E50E2BB0085B7E4 /* Auth */; };
 		FBDDCEA22E50E2BB0085B7E4 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FBDDCEA12E50E2BB0085B7E4 /* Functions */; };
@@ -67,7 +80,7 @@
 		FBDDCEB02E50EA910085B7E4 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FBDDCEAF2E50EA910085B7E4 /* Supabase */; };
 		FBDDCEB22E575E8B0085B7E4 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB12E575E8B0085B7E4 /* SupabaseService.swift */; };
 		FBDDCEB42E575E960085B7E4 /* UserPreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB32E575E960085B7E4 /* UserPreferencesManager.swift */; };
-		FBDDCEB72E578F5A0085B7E4 /* AlarmKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB62E578F5A0085B7E4 /* AlarmKitManager.swift */; };
+		FBDDCEB72E578F5A0085B7E4 /* CWAlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */; };
 		FBDDCEB92E5799DF0085B7E4 /* IntroSlideShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEB82E5799DF0085B7E4 /* IntroSlideShowView.swift */; };
 		FBDDCEBB2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDDCEBA2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -80,7 +93,28 @@
 			remoteGlobalIDString = FB0AEAAD2E204BD600CB812A;
 			remoteInfo = ColdWater;
 		};
+		FBB852452E5A428800107857 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB0AEAA62E204BD500CB812A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBB852312E5A428500107857;
+			remoteInfo = AlarmLiveActivityExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FBB8524C2E5A428800107857 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FBB852472E5A428800107857 /* AlarmLiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E8027575C639F1CC2BCC3C3 /* Pods-ColdWaterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColdWaterTests.debug.xcconfig"; path = "Target Support Files/Pods-ColdWaterTests/Pods-ColdWaterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,13 +176,42 @@
 		FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FB652F3D2E2C3B6800B323F1 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
 		FB652F412E2C3F3B00B323F1 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		FBB852262E590C1F00107857 /* TestContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContentView.swift; sourceTree = "<group>"; };
+		FBB852282E5916DB00107857 /* CWAlarmMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAlarmMetadata.swift; sourceTree = "<group>"; };
+		FBB8522A2E59171A00107857 /* CWAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAlarm.swift; sourceTree = "<group>"; };
+		FBB8522C2E5918DD00107857 /* AlarmAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAppIntents.swift; sourceTree = "<group>"; };
+		FBB852322E5A428500107857 /* AlarmLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AlarmLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBB852332E5A428500107857 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FBB852352E5A428600107857 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FBB8524D2E5A441300107857 /* AlarmLiveActivityExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlarmLiveActivityExtension.entitlements; sourceTree = "<group>"; };
 		FBDDCE9C2E2E87140085B7E4 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		FBDDCEB12E575E8B0085B7E4 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 		FBDDCEB32E575E960085B7E4 /* UserPreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesManager.swift; sourceTree = "<group>"; };
-		FBDDCEB62E578F5A0085B7E4 /* AlarmKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmKitManager.swift; sourceTree = "<group>"; };
+		FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWAlarmManager.swift; sourceTree = "<group>"; };
 		FBDDCEB82E5799DF0085B7E4 /* IntroSlideShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSlideShowView.swift; sourceTree = "<group>"; };
 		FBDDCEBA2E58B46D0085B7E4 /* OnboardingAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FBB852482E5A428800107857 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FBB852312E5A428500107857 /* AlarmLiveActivityExtension */;
+		};
+		FBB852532E5A462900107857 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TimerDigitsView.swift,
+			);
+			target = FB0AEAAD2E204BD600CB812A /* ColdWater */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FBB852372E5A428600107857 /* AlarmLiveActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (FBB852532E5A462900107857 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, FBB852482E5A428800107857 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = AlarmLiveActivity; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FB0AEAAB2E204BD600CB812A /* Frameworks */ = {
@@ -173,6 +236,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBB8522F2E5A428500107857 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBB852362E5A428600107857 /* SwiftUI.framework in Frameworks */,
+				FBB852342E5A428600107857 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -181,6 +253,8 @@
 			children = (
 				F0C486DCEB05F0011A3A24FC /* Pods_ColdWater.framework */,
 				B7BA4F2070DA439B41709F99 /* Pods_ColdWaterTests.framework */,
+				FBB852332E5A428500107857 /* WidgetKit.framework */,
+				FBB852352E5A428600107857 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,8 +273,10 @@
 		FB0AEAA52E204BD500CB812A = {
 			isa = PBXGroup;
 			children = (
+				FBB8524D2E5A441300107857 /* AlarmLiveActivityExtension.entitlements */,
 				FB0AEAB02E204BD600CB812A /* ColdWater */,
 				FB0AEAD52E22BAE000CB812A /* ColdWaterTests */,
+				FBB852372E5A428600107857 /* AlarmLiveActivity */,
 				FB0AEAAF2E204BD600CB812A /* Products */,
 				7D27BAB1657B99EE19CDD578 /* Pods */,
 				4DF9B2BAAC5945C7385BD98E /* Frameworks */,
@@ -212,6 +288,7 @@
 			children = (
 				FB0AEAAE2E204BD600CB812A /* ColdWater.app */,
 				FB0AEAD42E22BAE000CB812A /* ColdWaterTests.xctest */,
+				FBB852322E5A428500107857 /* AlarmLiveActivityExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +304,7 @@
 				FB5EC1D62E2C863200107E24 /* Location */,
 				FB5EC2052E2D8DE400107E24 /* Onboarding */,
 				FB5EC1D92E2C87A300107E24 /* UIConfiguration.swift */,
+				FBB852262E590C1F00107857 /* TestContentView.swift */,
 				FB0AEAB12E204BD600CB812A /* ColdWaterApp.swift */,
 				FB652F3B2E2C3AA700B323F1 /* SettingsView.swift */,
 				FB5EC1E72E2C92C900107E24 /* SettingsViewModel.swift */,
@@ -378,7 +456,10 @@
 		FBDDCEB52E578F440085B7E4 /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				FBDDCEB62E578F5A0085B7E4 /* AlarmKitManager.swift */,
+				FBB8522C2E5918DD00107857 /* AlarmAppIntents.swift */,
+				FBDDCEB62E578F5A0085B7E4 /* CWAlarmManager.swift */,
+				FBB852282E5916DB00107857 /* CWAlarmMetadata.swift */,
+				FBB8522A2E59171A00107857 /* CWAlarm.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -395,10 +476,12 @@
 				FB0AEAAB2E204BD600CB812A /* Frameworks */,
 				FB0AEAAC2E204BD600CB812A /* Resources */,
 				8321CC48F8D0D0534AE5D127 /* [CP] Embed Pods Frameworks */,
+				FBB8524C2E5A428800107857 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FBB852462E5A428800107857 /* PBXTargetDependency */,
 			);
 			name = ColdWater;
 			productName = ColdWater;
@@ -424,6 +507,28 @@
 			productReference = FB0AEAD42E22BAE000CB812A /* ColdWaterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FBB852312E5A428500107857 /* AlarmLiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBB852492E5A428800107857 /* Build configuration list for PBXNativeTarget "AlarmLiveActivityExtension" */;
+			buildPhases = (
+				FBB8522E2E5A428500107857 /* Sources */,
+				FBB8522F2E5A428500107857 /* Frameworks */,
+				FBB852302E5A428500107857 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FBB852372E5A428600107857 /* AlarmLiveActivity */,
+			);
+			name = AlarmLiveActivityExtension;
+			packageProductDependencies = (
+			);
+			productName = AlarmLiveActivityExtension;
+			productReference = FBB852322E5A428500107857 /* AlarmLiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -431,7 +536,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					FB0AEAAD2E204BD600CB812A = {
@@ -440,6 +545,9 @@
 					FB0AEAD32E22BADF00CB812A = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = FB0AEAAD2E204BD600CB812A;
+					};
+					FBB852312E5A428500107857 = {
+						CreatedOnToolsVersion = 26.0;
 					};
 				};
 			};
@@ -461,6 +569,7 @@
 			targets = (
 				FB0AEAAD2E204BD600CB812A /* ColdWater */,
 				FB0AEAD32E22BADF00CB812A /* ColdWaterTests */,
+				FBB852312E5A428500107857 /* AlarmLiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -477,6 +586,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FB0AEAD22E22BADF00CB812A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBB852302E5A428500107857 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -574,10 +690,11 @@
 				FB5EC1CA2E2C7F2D00107E24 /* CWUser.swift in Sources */,
 				FB652F3A2E2C3A6A00B323F1 /* HomeViewModel.swift in Sources */,
 				FB5EC1DE2E2C88C300107E24 /* SignUpView.swift in Sources */,
-				FBDDCEB72E578F5A0085B7E4 /* AlarmKitManager.swift in Sources */,
+				FBDDCEB72E578F5A0085B7E4 /* CWAlarmManager.swift in Sources */,
 				FB5EC2142E2D90C000107E24 /* GracePeriodView.swift in Sources */,
 				FB0AEAC42E20507800CB812A /* LocationPickerView.swift in Sources */,
 				FB5EC1C82E2C7EFB00107E24 /* AppleSignInHelpers.swift in Sources */,
+				FBB852272E590C1F00107857 /* TestContentView.swift in Sources */,
 				FB0AEAB22E204BD600CB812A /* ColdWaterApp.swift in Sources */,
 				FB0AEAC22E20507300CB812A /* LocationManager.swift in Sources */,
 				FB5EC1DC2E2C88BC00107E24 /* SignInView.swift in Sources */,
@@ -593,12 +710,15 @@
 				FB5EC2072E2D8DE500107E24 /* UserPreferences.swift in Sources */,
 				FB5EC20E2E2D90AF00107E24 /* WakeUpMethodView.swift in Sources */,
 				FB5EC2082E2D8DE500107E24 /* WakeUpTimeView.swift in Sources */,
+				FBB852292E5916DB00107857 /* CWAlarmMetadata.swift in Sources */,
 				FB5EC2092E2D8DE500107E24 /* OnboardingConfirmationView.swift in Sources */,
 				FB5EC20A2E2D8DE500107E24 /* OnboardingCoordinator.swift in Sources */,
 				FBDDCE9D2E2E87140085B7E4 /* HealthKitManager.swift in Sources */,
 				FB5EC1E02E2C8EDC00107E24 /* SignUpViewModel.swift in Sources */,
 				FB5EC1D52E2C85F500107E24 /* WelcomeView.swift in Sources */,
 				FB5EC2162E2D90CB00107E24 /* MotivationMethodView.swift in Sources */,
+				FBB8522D2E5918DD00107857 /* AlarmAppIntents.swift in Sources */,
+				FBB8522B2E59171A00107857 /* CWAlarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +740,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FBB8522E2E5A428500107857 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBB852572E5A485200107857 /* SingletonRegistry.swift in Sources */,
+				FBB852562E5A474D00107857 /* CWAlarm.swift in Sources */,
+				FBB8524F2E5A45F400107857 /* UserPreferences.swift in Sources */,
+				FBB852542E5A472900107857 /* AlarmAppIntents.swift in Sources */,
+				FBB8524E2E5A45BD00107857 /* CWAlarmMetadata.swift in Sources */,
+				FBB852552E5A474300107857 /* CWAlarmManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -627,6 +760,11 @@
 			isa = PBXTargetDependency;
 			target = FB0AEAAD2E204BD600CB812A /* ColdWater */;
 			targetProxy = FB0AEAD82E22BAE000CB812A /* PBXContainerItemProxy */;
+		};
+		FBB852462E5A428800107857 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBB852312E5A428500107857 /* AlarmLiveActivityExtension */;
+			targetProxy = FBB852452E5A428800107857 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -776,6 +914,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -816,6 +955,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -869,6 +1009,74 @@
 			};
 			name = Release;
 		};
+		FBB8524A2E5A428800107857 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AlarmLiveActivityExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 969BFJ8RVF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AlarmLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AlarmLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catherinecshi.ColdWater.AlarmLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FBB8524B2E5A428800107857 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AlarmLiveActivityExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 969BFJ8RVF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AlarmLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AlarmLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catherinecshi.ColdWater.AlarmLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -895,6 +1103,15 @@
 			buildConfigurations = (
 				FB0AEADB2E22BAE000CB812A /* Debug */,
 				FB0AEADC2E22BAE000CB812A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBB852492E5A428800107857 /* Build configuration list for PBXNativeTarget "AlarmLiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBB8524A2E5A428800107857 /* Debug */,
+				FBB8524B2E5A428800107857 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

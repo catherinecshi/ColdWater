@@ -5,6 +5,7 @@ struct MotivationMethodView: View {
     
     private func descriptionFor(_ method: MotivationMethod) -> String {
         switch method {
+        // need to add option to call someone
         case .phone:
             return "Your phone will be locked until you complete your wake-up task"
         case .money:

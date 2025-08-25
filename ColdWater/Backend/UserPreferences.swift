@@ -43,7 +43,7 @@ enum MotivationMethod: String, CaseIterable, Codable {
     case none = "none"
 }
 
-struct Location: Codable {
+struct Location: Codable, Equatable, Hashable {
     let latitude: Double
     let longitude: Double
     let geofenceRadius: Double
